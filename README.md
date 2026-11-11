@@ -34,6 +34,8 @@ Pipeline previsto:
 
 ```
 src/citizentech_vision/   código do componente
+  document.py             detecção do documento e correção de perspectiva
+  metrics.py              métricas de avaliação
   synthetic/              gerador do dataset sintético
 scripts/                  utilitários (verificação do ambiente, geração do dataset)
 tests/                    testes automatizados
@@ -64,6 +66,38 @@ Para gerar novamente (a semente fixa garante o mesmo resultado):
 ```bash
 python scripts/generate_dataset.py
 ```
+
+## Detecção do documento e correção de perspectiva
+
+A função `rectify_document` recebe a foto e devolve o documento em visão frontal, com tamanho fixo de página A4 (1240 x 1754 px):
+
+1. Calcula o gradiente de cor da imagem (Sobel nos três canais) e binariza as bordas fortes
+2. Fecha pequenas falhas com morfologia e pega o contorno externo
+3. Aproxima o contorno por um quadrilátero (`approxPolyDP`) e ordena os cantos: superior esquerdo, superior direito, inferior direito, inferior esquerdo
+4. Refina cada lado: procura a borda real ao longo da normal, ajusta uma reta por lado e recalcula os cantos pela interseção das retas
+5. Aplica `getPerspectiveTransform` e `warpPerspective`
+
+Se o limiar de Otsu for necessário como reserva, ele só entra quando o gradiente não encontra nenhum quadrilátero válido. Se nada é encontrado, a imagem original é devolvida com `encontrado=False`, para o MVP pedir outra foto ou a digitação manual.
+
+A confiança (`confianca`) mede o quanto as bordas do quadrilátero são fortes e serve como filtro. Ela não é uma probabilidade calibrada.
+
+Para avaliar nas 36 fotos do dataset:
+
+```bash
+python scripts/evaluate_document_detection.py
+```
+
+Resultado atual:
+
+| Condição | Fotos | Documento encontrado | IoU médio | Erro médio nos cantos |
+|---|---|---|---|---|
+| frontal | 12 | 12 | 0,998 | 1,3 px |
+| inclinada | 12 | 12 | 0,998 | 1,4 px |
+| dificil | 12 | 12 | 0,997 | 2,6 px |
+
+O tempo médio é de 0,2 s por foto. As imagens corrigidas ficam em `data/output/rectified/`.
+
+Limitações: os testes usam fotos simuladas; o documento precisa estar em pé (orientação retrato) e inteiro na imagem; fundos com muitos objetos ou texturas fortes podem confundir a detecção.
 
 ## Como instalar
 
