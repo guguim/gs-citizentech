@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+
+# IDE
+.idea/
+.vscode/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Saídas geradas
+data/output/
