@@ -36,7 +36,15 @@ Pipeline previsto:
 src/citizentech_vision/   código do componente
   document.py             detecção do documento e correção de perspectiva
   preprocess.py           pré-processamento da imagem para OCR
-  ocr.py                  leitura de texto com Tesseract
+  ocr.py                  leitura de texto e palavras com Tesseract
+  company.py              identificação da empresa pelo cabeçalho
+  companies.py            configuração por empresa (zona do endereço, palavras-chave)
+  address.py              separação do endereço em campos
+  validation.py           validação dos campos e consistência CEP x UF
+  voting.py               votação entre variantes de pré-processamento
+  extraction.py           pipeline de extração do endereço do cliente
+  textmatch.py            comparação aproximada de textos
+  cities.py               lista de cidades conhecidas para corrigir o OCR
   metrics.py              métricas de avaliação (detecção e OCR)
   synthetic/              gerador do dataset sintético
 scripts/                  utilitários (verificação do ambiente, geração do dataset)
@@ -157,6 +165,73 @@ python scripts/experiment_preprocessing.py --varrer-psm mediana+adaptativo
 ```
 
 A execução completa leva alguns minutos e grava o detalhe por foto em `data/output/preprocessing_experiments.csv`.
+
+## Extração do endereço do cliente
+
+A função `extract_address(foto)` (`src/citizentech_vision/extraction.py`) recebe a foto e devolve o endereço separado em campos, com confiança e a lista de campos que o usuário deve conferir. Para testar em uma foto:
+
+```bash
+python scripts/extract_address.py data/synthetic/photos/enel_01_frontal.jpg
+```
+
+### Como funciona
+
+1. **Retificação:** a página é localizada e corrigida (seção anterior).
+2. **Empresa:** o cabeçalho (14% superior da página) é lido com OCR e comparado com palavras-chave de cada empresa (`ENEL`, `SABESP`, `CLARO` e termos como `SANEAMENTO` e `FATURA DE SERVIÇOS`). A comparação aceita pequenos erros de OCR, como `Sa besp`.
+3. **Zona do endereço:** cada empresa tem uma região configurada em `companies.py` onde fica o endereço do cliente. O recorte passa por `prepare_for_ocr` e é lido linha a linha. Agências, lojas de pagamento e sede ficam fora dessa região, e é assim que o endereço do cliente é distinguido dos demais.
+4. **Plano B por âncora:** se a empresa não foi identificada ou o resultado da zona não passa na validação, a página inteira é lida e o endereço é procurado logo abaixo de um rótulo como `ENDEREÇO DO IMÓVEL` ou `ENDEREÇO DE COBRANÇA`. Linhas depois de rótulos como `AGÊNCIA`, `LOJAS` e `SEDE` encerram o bloco. Sem rótulo, o método aceita só um bloco com CEP na parte superior da página (até 45% da altura).
+5. **Separação em campos:** o parser entende os três formatos (Enel em maiúsculas com bairro em linha própria, Sabesp abreviada em duas linhas, Claro com bairro e cidade na mesma linha), expande abreviações (`AV` vira `Avenida`, `CS 143` vira `Casa 143`), tolera separadores trocados pelo OCR e corrige a cidade com uma lista de cidades conhecidas.
+6. **Validação:** campos obrigatórios (logradouro, número, cidade, UF e CEP), formato do CEP, UF existente, CEP dentro da faixa da UF, número com formato plausível e termos suspeitos no logradouro e no bairro (por exemplo, palavra de uma ou duas letras ou começando em minúscula). Se a UF não for lida, ela é inferida do CEP e marcada para revisão.
+7. **Reforço:** quando a primeira leitura tem problema ou baixa confiança, o recorte é lido de novo com mais duas variantes de pré-processamento (`mediana` e `cinza`) e cada campo é decidido por maioria. Se as variantes divergem, o campo é marcado para revisão.
+8. **Confiança e revisão:** a confiança é a média da confiança do Tesseract nas linhas usadas, menos 0,15 por problema encontrado. Campos com palavra de baixa confiança, divergência ou falha na validação vão em `campos_revisar`. Todos os campos são apresentados para confirmação, e os listados em `campos_revisar` devem ser destacados.
+
+O resultado (`ExtractionResult`) traz `encontrado`, `empresa`, `campos`, `confianca`, `precisa_revisao`, `campos_revisar`, `problemas`, `metodo` e as linhas lidas.
+
+### Avaliação
+
+```bash
+python scripts/evaluate_extraction.py
+python scripts/evaluate_extraction.py --metodo zona
+python scripts/evaluate_extraction.py --metodo ancora
+python scripts/evaluate_extraction.py --condicao dificil --saida data/output/extracao.json
+```
+
+O script compara cada campo com o gabarito (ignorando maiúsculas e espaços, mas não acentos) nas 36 fotos. A coluna "endereço" é a porcentagem de fotos com os sete campos corretos; "distrator" é a porcentagem de fotos em que o CEP extraído é o de uma agência, loja ou sede.
+
+| Método | Frontal | Inclinada | Difícil | Geral | Empresa | Distrator | Tempo por foto |
+|---|---|---|---|---|---|---|---|
+| Zona por empresa | 100% | 100% | 67% | 89% | 100% | 0% | 0,7 s |
+| Âncora (página inteira) | 100% | 92% | 50% | 81% | 100% | 0% | 1,7 s |
+| **Automático (zona, depois âncora)** | 100% | 100% | 67% | **89%** | 100% | 0% | 1,4 s |
+
+Acerto por campo no modo automático: logradouro 89%, número 97%, complemento 94%, bairro 97%, cidade 97%, UF 97% e CEP 97%.
+
+Confiança e revisão no modo automático:
+
+- 14 das 36 fotos (39%) foram marcadas para revisão.
+- As 4 fotos com algum campo errado foram todas marcadas para revisão. Das 32 corretas, 10 também foram marcadas, ou seja, o sistema é conservador.
+- A confiança média é 0,72 nas fotos corretas e 0,23 nas erradas.
+
+### Análise dos erros
+
+Os quatro erros do modo automático são todos de foto difícil (escura, com sombra, desfoque e ruído):
+
+| Foto | O que aconteceu |
+|---|---|
+| `enel_02_dificil` | `Dom Pedro II` lido como `Dom Pedro Tt`. O termo de duas letras é apontado como suspeito. |
+| `sabesp_02_dificil` | A foto é ilegível (escura, borrada e com a página 17 px deslocada na retificação). O sistema não inventa endereço, devolve confiança 0 e pede preenchimento manual. |
+| `sabesp_03_dificil` | `José` sem acento e complemento `BL B AP 174` lido como `BL BAP 174`. O complemento é apontado como não reconhecido. |
+| `claro_03_dificil` | `Itapetininga` lido como `Rapetininga` e `Barão` como `Bardo`. As variantes divergem e o campo é marcado para revisão. |
+
+Um erro que o plano B por âncora cometia antes de uma correção: em `claro_04_dificil`, quando o rótulo do endereço do cliente não era lido, ele aceitava o primeiro CEP da página, e o seguinte era o de uma loja (um endereço distrator). Agora ele só aceita blocos na parte superior da página; sem rótulo e sem bloco, devolve "não encontrado" e pede preenchimento manual. Há um teste que cobre esse caso.
+
+### Limitações
+
+- As fotos são simuladas e os três layouts foram desenhados pela equipe com base em faturas reais, mas não são cópias. Em faturas reais, a zona do endereço de cada empresa, as palavras-chave e os rótulos precisam ser calibrados.
+- Limiares como 0,7 de confiança por palavra e 45% da altura da página foram escolhidos olhando para este dataset, e os números acima tendem a ser otimistas.
+- A lista de cidades conhecidas é parcial (capitais e cidades grandes). Em produção deve ser trocada pela base de municípios do IBGE. A validação CEP x UF usa as faixas gerais dos Correios, sem consultar uma base de CEPs, então não confere se a rua existe naquele CEP.
+- O OCR confiante e errado é possível: nomes de rua lidos errado com palavras que parecem plausíveis (`Rapetininga`) só são pegos quando as variantes divergem.
+- Perda de acentos (`José` lido como `Jose`) conta como erro na avaliação, mas é de baixo impacto para o usuário que confirma o endereço.
 
 ## Como instalar
 
