@@ -35,7 +35,9 @@ Pipeline previsto:
 ```
 src/citizentech_vision/   código do componente
   document.py             detecção do documento e correção de perspectiva
-  metrics.py              métricas de avaliação
+  preprocess.py           pré-processamento da imagem para OCR
+  ocr.py                  leitura de texto com Tesseract
+  metrics.py              métricas de avaliação (detecção e OCR)
   synthetic/              gerador do dataset sintético
 scripts/                  utilitários (verificação do ambiente, geração do dataset)
 tests/                    testes automatizados
@@ -98,6 +100,63 @@ Resultado atual:
 O tempo médio é de 0,2 s por foto. As imagens corrigidas ficam em `data/output/rectified/`.
 
 Limitações: os testes usam fotos simuladas; o documento precisa estar em pé (orientação retrato) e inteiro na imagem; fundos com muitos objetos ou texturas fortes podem confundir a detecção.
+
+## Pré-processamento e OCR
+
+Depois da correção de perspectiva, o recorte da região do endereço passa por `prepare_for_ocr` e segue para `read_text` (`pytesseract`, `lang="por"`, `--psm 6`).
+
+O pipeline escolhido é: tons de cinza, filtro de mediana 3x3 e limiar adaptativo gaussiano (bloco 51, constante 15). Ele foi escolhido comparando variantes uma a uma com `scripts/experiment_preprocessing.py`, que mede o erro do OCR contra o texto impresso conhecido (gabarito) nas 36 fotos já retificadas:
+
+- **CER:** taxa de erro de caracteres (distância de edição dividida pelo tamanho do texto esperado). Menor é melhor.
+- **CEP ok:** porcentagem de recortes em que o CEP esperado foi lido corretamente.
+
+| Variante | CER frontal | CER inclinada | CER difícil | CER geral | CEP ok |
+|---|---|---|---|---|---|
+| referência: documento limpo, sem pré-processamento | 0,001 | 0,001 | 0,001 | 0,001 | 100% |
+| original (sem pré-processamento) | 0,002 | 0,001 | 0,385 | 0,129 | 89% |
+| cinza | 0,002 | 0,001 | 0,373 | 0,125 | 89% |
+| ampliar 2x | 0,001 | 0,001 | 1,760 | 0,587 | 89% |
+| mediana 3x3 | 0,002 | 0,002 | 0,207 | 0,070 | 89% |
+| mediana 5x5 | 0,004 | 0,004 | 0,254 | 0,088 | 89% |
+| equalizar histograma | 4,260 | 1,852 | 2,298 | 2,803 | 8% |
+| esticar contraste | 0,002 | 0,001 | 0,391 | 0,131 | 89% |
+| Otsu | 0,002 | 0,003 | 0,348 | 0,118 | 89% |
+| mediana + Otsu | 0,006 | 0,005 | 0,267 | 0,093 | 86% |
+| equalizar + mediana + Otsu | 2,773 | 1,533 | 1,704 | 2,003 | 3% |
+| esticar + mediana + Otsu | 0,002 | 0,010 | 0,273 | 0,095 | 81% |
+| **mediana + adaptativo (escolhida)** | 0,001 | 0,006 | **0,087** | **0,031** | **94%** |
+| ampliar + mediana + adaptativo | 0,002 | 0,000 | 0,135 | 0,046 | 89% |
+| esticar + mediana + adaptativo | 0,002 | 0,008 | 0,928 | 0,313 | 83% |
+| esticar (só se baixo contraste) + mediana + adaptativo | 0,001 | 0,006 | 0,928 | 0,312 | 83% |
+| mediana + adaptativo + abertura | 0,013 | 0,013 | 0,220 | 0,082 | 81% |
+| mediana + adaptativo + fechamento | 0,006 | 0,014 | 0,092 | 0,037 | 89% |
+
+O que os experimentos mostraram:
+
+- Fotos frontais e inclinadas já são lidas quase sem erro sem pré-processamento. O ganho está nas fotos difíceis (escuras, com sombra, desfoque e ruído).
+- O filtro de mediana 3x3 reduz o ruído sem apagar os caracteres. O de 5x5 já é pior.
+- O limiar adaptativo, que calcula o limite em cada vizinhança, lida bem com a sombra, e o Otsu global não. O bloco e a constante foram ajustados no próprio dataset; em fotos reais podem precisar de reajuste.
+- A equalização de histograma piora muito o resultado. O papel branco domina o histograma do recorte, e a equalização espalha as pequenas variações desse fundo por toda a faixa de cinzas, transformando-o em ruído.
+- Esticar o contraste não ajuda sozinho e piora com o limiar adaptativo, provavelmente porque amplifica o ruído e a constante do limiar fica mal calibrada.
+- Ampliar a imagem 2x não ajuda: o texto já tem tamanho suficiente (cerca de 30 px de altura) e a ampliação também aumenta o ruído.
+- Abrir a máscara (erosão e dilatação) piora o resultado, provavelmente por apagar traços finos das letras; fechar não traz ganho.
+- No `--psm`, os modos 6 (bloco de texto) e 11 (texto esparso) têm erro parecido e os modos 3 e 4 ficam um pouco piores. Os modos de linha única (7 e 13) falham porque o recorte tem três linhas. Foi usado o 6.
+
+Erros que sobram na condição difícil:
+
+- Em `sabesp_02_dificil`, a página retificada ficou 17 px deslocada na vertical. O recorte fixo corta a primeira linha, e o OCR devolve lixo. Isso mostra que o recorte por coordenadas fixas é frágil e deve ganhar margem ou âncoras.
+- Em `claro_01_dificil`, o OCR leu um dígito errado do CEP (5 no lugar de 3). Esse tipo de erro só é pego na validação e na confirmação pelo usuário.
+- Os acentos quase não contam: o CER sem acentos é praticamente igual ao CER geral.
+
+Para repetir a comparação:
+
+```bash
+python scripts/experiment_preprocessing.py
+python scripts/experiment_preprocessing.py --variante mediana mediana+adaptativo
+python scripts/experiment_preprocessing.py --varrer-psm mediana+adaptativo
+```
+
+A execução completa leva alguns minutos e grava o detalhe por foto em `data/output/preprocessing_experiments.csv`.
 
 ## Como instalar
 
