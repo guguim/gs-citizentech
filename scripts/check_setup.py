@@ -1,10 +1,3 @@
-"""Verifica se o ambiente está pronto: bibliotecas, Tesseract e um OCR de teste.
-
-Uso:
-    python scripts/check_setup.py
-    python scripts/check_setup.py --lang eng
-"""
-
 import argparse
 import sys
 from importlib.metadata import version
@@ -93,7 +86,7 @@ def ocr_de_teste(idioma):
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description="Verifica se o ambiente está pronto")
     parser.add_argument("--lang", default="por", help="idioma do Tesseract (padrão: por)")
     args = parser.parse_args()
 

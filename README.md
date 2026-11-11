@@ -34,8 +34,35 @@ Pipeline previsto:
 
 ```
 src/citizentech_vision/   código do componente
-scripts/                  utilitários (ex.: verificação do ambiente)
+  synthetic/              gerador do dataset sintético
+scripts/                  utilitários (verificação do ambiente, geração do dataset)
 tests/                    testes automatizados
+data/                     dataset sintético e gabarito
+```
+
+## Dataset sintético
+
+Para testar o pipeline sem usar dados pessoais reais, o repositório traz um dataset sintético com gabarito, gerado por código:
+
+- 3 empresas (Enel, Sabesp e Claro), com 4 documentos fictícios cada
+- cada documento é fotografado de forma simulada em 3 condições: `frontal`, `inclinada` e `dificil` (perspectiva, rotação, sombra, pouca luz, desfoque e ruído), totalizando 36 fotos
+- todos os nomes, endereços e números são inventados, e cada página traz a marca "DOCUMENTO SINTÉTICO PARA TESTES"
+- cada comprovante tem o endereço do cliente e dois endereços "distratores" (agência ou loja de atendimento e sede da empresa)
+
+Estrutura gerada:
+
+```
+data/synthetic/documents/    comprovantes limpos (PNG)
+data/synthetic/photos/       fotos simuladas (JPG)
+data/ground_truth/ground_truth.json   gabarito de cada foto
+```
+
+O gabarito traz, para cada foto: empresa, endereço correto separado em campos, linhas impressas, região do endereço (coordenadas relativas), endereços distratores, os 4 cantos do documento na foto e os parâmetros de perturbação usados.
+
+Para gerar novamente (a semente fixa garante o mesmo resultado):
+
+```bash
+python scripts/generate_dataset.py
 ```
 
 ## Como instalar

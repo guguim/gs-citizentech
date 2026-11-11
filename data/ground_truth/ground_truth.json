@@ -1,0 +1,2186 @@
+[
+  {
+    "id": "enel_01_frontal",
+    "empresa": "enel",
+    "documento_limpo": "synthetic/documents/enel_01.png",
+    "foto": "synthetic/photos/enel_01_frontal.jpg",
+    "cliente": "Henrique Klein Teixeira",
+    "endereco": {
+      "logradouro": "Travessa Marechal Deodoro",
+      "numero": "108",
+      "complemento": "",
+      "bairro": "Vila Industrial",
+      "cidade": "São Bernardo do Campo",
+      "uf": "SP",
+      "cep": "09819-597"
+    },
+    "linhas_impressas": [
+      "TRAVESSA MARECHAL DEODORO, 108",
+      "VILA INDUSTRIAL",
+      "CEP 09819-597 - SÃO BERNARDO DO CAMPO - SP"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1853,
+      0.6935,
+      0.2965
+    ],
+    "enderecos_distratores": [
+      "Travessa das Palmeiras, 1501 - Santa Cecília - São Paulo/SP - CEP 01523-484",
+      "Travessa Conselheiro Nébias, 1237 - Vila Nova - São Bernardo do Campo/SP - CEP 09704-055"
+    ],
+    "cantos_documento_foto": [
+      [
+        106.6,
+        192.0
+      ],
+      [
+        1108.5,
+        163.9
+      ],
+      [
+        1114.4,
+        1547.2
+      ],
+      [
+        135.4,
+        1568.8
+      ]
+    ],
+    "condicao": "frontal",
+    "perturbacoes": {
+      "condicao": "frontal",
+      "perspectiva": 0.025,
+      "rotacao_graus": -1.15,
+      "brilho": 1.033,
+      "sombra": 0.0,
+      "desfoque": 0,
+      "ruido": 2.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 90
+    }
+  },
+  {
+    "id": "enel_01_inclinada",
+    "empresa": "enel",
+    "documento_limpo": "synthetic/documents/enel_01.png",
+    "foto": "synthetic/photos/enel_01_inclinada.jpg",
+    "cliente": "Henrique Klein Teixeira",
+    "endereco": {
+      "logradouro": "Travessa Marechal Deodoro",
+      "numero": "108",
+      "complemento": "",
+      "bairro": "Vila Industrial",
+      "cidade": "São Bernardo do Campo",
+      "uf": "SP",
+      "cep": "09819-597"
+    },
+    "linhas_impressas": [
+      "TRAVESSA MARECHAL DEODORO, 108",
+      "VILA INDUSTRIAL",
+      "CEP 09819-597 - SÃO BERNARDO DO CAMPO - SP"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1853,
+      0.6935,
+      0.2965
+    ],
+    "enderecos_distratores": [
+      "Travessa das Palmeiras, 1501 - Santa Cecília - São Paulo/SP - CEP 01523-484",
+      "Travessa Conselheiro Nébias, 1237 - Vila Nova - São Bernardo do Campo/SP - CEP 09704-055"
+    ],
+    "cantos_documento_foto": [
+      [
+        91.7,
+        206.2
+      ],
+      [
+        1068.5,
+        147.4
+      ],
+      [
+        1213.6,
+        1483.2
+      ],
+      [
+        238.7,
+        1603.8
+      ]
+    ],
+    "condicao": "inclinada",
+    "perturbacoes": {
+      "condicao": "inclinada",
+      "perspectiva": 0.053,
+      "rotacao_graus": -6.36,
+      "brilho": 0.861,
+      "sombra": 0.233,
+      "desfoque": 3,
+      "ruido": 4.0,
+      "fundo": "escuro",
+      "qualidade_jpeg": 85
+    }
+  },
+  {
+    "id": "enel_01_dificil",
+    "empresa": "enel",
+    "documento_limpo": "synthetic/documents/enel_01.png",
+    "foto": "synthetic/photos/enel_01_dificil.jpg",
+    "cliente": "Henrique Klein Teixeira",
+    "endereco": {
+      "logradouro": "Travessa Marechal Deodoro",
+      "numero": "108",
+      "complemento": "",
+      "bairro": "Vila Industrial",
+      "cidade": "São Bernardo do Campo",
+      "uf": "SP",
+      "cep": "09819-597"
+    },
+    "linhas_impressas": [
+      "TRAVESSA MARECHAL DEODORO, 108",
+      "VILA INDUSTRIAL",
+      "CEP 09819-597 - SÃO BERNARDO DO CAMPO - SP"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1853,
+      0.6935,
+      0.2965
+    ],
+    "enderecos_distratores": [
+      "Travessa das Palmeiras, 1501 - Santa Cecília - São Paulo/SP - CEP 01523-484",
+      "Travessa Conselheiro Nébias, 1237 - Vila Nova - São Bernardo do Campo/SP - CEP 09704-055"
+    ],
+    "cantos_documento_foto": [
+      [
+        348.1,
+        176.3
+      ],
+      [
+        1274.5,
+        361.8
+      ],
+      [
+        925.6,
+        1625.8
+      ],
+      [
+        42.1,
+        1450.6
+      ]
+    ],
+    "condicao": "dificil",
+    "perturbacoes": {
+      "condicao": "dificil",
+      "perspectiva": 0.093,
+      "rotacao_graus": 11.52,
+      "brilho": 0.63,
+      "sombra": 0.379,
+      "desfoque": 5,
+      "ruido": 8.0,
+      "fundo": "claro",
+      "qualidade_jpeg": 75
+    }
+  },
+  {
+    "id": "enel_02_frontal",
+    "empresa": "enel",
+    "documento_limpo": "synthetic/documents/enel_02.png",
+    "foto": "synthetic/photos/enel_02_frontal.jpg",
+    "cliente": "Nelson Barbosa Ibrahim",
+    "endereco": {
+      "logradouro": "Avenida Dom Pedro II",
+      "numero": "2965",
+      "complemento": "Bloco B Apto 136",
+      "bairro": "Vila Mariana",
+      "cidade": "Guarulhos",
+      "uf": "SP",
+      "cep": "07311-536"
+    },
+    "linhas_impressas": [
+      "AVENIDA DOM PEDRO II, 2965 - BLOCO B APTO 136",
+      "VILA MARIANA",
+      "CEP 07311-536 - GUARULHOS - SP"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1853,
+      0.6935,
+      0.2965
+    ],
+    "enderecos_distratores": [
+      "Alameda dos Ipês, 2042 - Pinheiros - São Paulo/SP - CEP 05759-052",
+      "Avenida Rio Branco, 1520 - Vila Mariana - Guarulhos/SP - CEP 07327-553"
+    ],
+    "cantos_documento_foto": [
+      [
+        146.7,
+        158.8
+      ],
+      [
+        1150.9,
+        179.4
+      ],
+      [
+        1133.3,
+        1632.3
+      ],
+      [
+        106.1,
+        1592.1
+      ]
+    ],
+    "condicao": "frontal",
+    "perturbacoes": {
+      "condicao": "frontal",
+      "perspectiva": 0.012,
+      "rotacao_graus": 1.22,
+      "brilho": 0.951,
+      "sombra": 0.0,
+      "desfoque": 0,
+      "ruido": 2.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 90
+    }
+  },
+  {
+    "id": "enel_02_inclinada",
+    "empresa": "enel",
+    "documento_limpo": "synthetic/documents/enel_02.png",
+    "foto": "synthetic/photos/enel_02_inclinada.jpg",
+    "cliente": "Nelson Barbosa Ibrahim",
+    "endereco": {
+      "logradouro": "Avenida Dom Pedro II",
+      "numero": "2965",
+      "complemento": "Bloco B Apto 136",
+      "bairro": "Vila Mariana",
+      "cidade": "Guarulhos",
+      "uf": "SP",
+      "cep": "07311-536"
+    },
+    "linhas_impressas": [
+      "AVENIDA DOM PEDRO II, 2965 - BLOCO B APTO 136",
+      "VILA MARIANA",
+      "CEP 07311-536 - GUARULHOS - SP"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1853,
+      0.6935,
+      0.2965
+    ],
+    "enderecos_distratores": [
+      "Alameda dos Ipês, 2042 - Pinheiros - São Paulo/SP - CEP 05759-052",
+      "Avenida Rio Branco, 1520 - Vila Mariana - Guarulhos/SP - CEP 07327-553"
+    ],
+    "cantos_documento_foto": [
+      [
+        231.6,
+        183.2
+      ],
+      [
+        1173.5,
+        307.1
+      ],
+      [
+        1010.9,
+        1709.5
+      ],
+      [
+        43.8,
+        1618.4
+      ]
+    ],
+    "condicao": "inclinada",
+    "perturbacoes": {
+      "condicao": "inclinada",
+      "perspectiva": 0.054,
+      "rotacao_graus": 6.81,
+      "brilho": 0.939,
+      "sombra": 0.224,
+      "desfoque": 3,
+      "ruido": 4.0,
+      "fundo": "azul",
+      "qualidade_jpeg": 85
+    }
+  },
+  {
+    "id": "enel_02_dificil",
+    "empresa": "enel",
+    "documento_limpo": "synthetic/documents/enel_02.png",
+    "foto": "synthetic/photos/enel_02_dificil.jpg",
+    "cliente": "Nelson Barbosa Ibrahim",
+    "endereco": {
+      "logradouro": "Avenida Dom Pedro II",
+      "numero": "2965",
+      "complemento": "Bloco B Apto 136",
+      "bairro": "Vila Mariana",
+      "cidade": "Guarulhos",
+      "uf": "SP",
+      "cep": "07311-536"
+    },
+    "linhas_impressas": [
+      "AVENIDA DOM PEDRO II, 2965 - BLOCO B APTO 136",
+      "VILA MARIANA",
+      "CEP 07311-536 - GUARULHOS - SP"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1853,
+      0.6935,
+      0.2965
+    ],
+    "enderecos_distratores": [
+      "Alameda dos Ipês, 2042 - Pinheiros - São Paulo/SP - CEP 05759-052",
+      "Avenida Rio Branco, 1520 - Vila Mariana - Guarulhos/SP - CEP 07327-553"
+    ],
+    "cantos_documento_foto": [
+      [
+        108.3,
+        270.1
+      ],
+      [
+        1050.7,
+        184.2
+      ],
+      [
+        1223.8,
+        1511.3
+      ],
+      [
+        284.8,
+        1738.5
+      ]
+    ],
+    "condicao": "dificil",
+    "perturbacoes": {
+      "condicao": "dificil",
+      "perspectiva": 0.095,
+      "rotacao_graus": -8.76,
+      "brilho": 0.669,
+      "sombra": 0.431,
+      "desfoque": 5,
+      "ruido": 8.0,
+      "fundo": "azul",
+      "qualidade_jpeg": 75
+    }
+  },
+  {
+    "id": "enel_03_frontal",
+    "empresa": "enel",
+    "documento_limpo": "synthetic/documents/enel_03.png",
+    "foto": "synthetic/photos/enel_03_frontal.jpg",
+    "cliente": "Tatiana Pacheco Gonçalves",
+    "endereco": {
+      "logradouro": "Avenida Conselheiro Nébias",
+      "numero": "2761",
+      "complemento": "",
+      "bairro": "Tatuapé",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "02059-796"
+    },
+    "linhas_impressas": [
+      "AVENIDA CONSELHEIRO NÉBIAS, 2761",
+      "TATUAPÉ",
+      "CEP 02059-796 - SÃO PAULO - SP"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1853,
+      0.6935,
+      0.2965
+    ],
+    "enderecos_distratores": [
+      "Avenida Joaquim Nabuco, 2704 - Itaim Bibi - Osasco/SP - CEP 06187-012",
+      "Rua Santos Dumont, 198 - Itaim Bibi - São Paulo/SP - CEP 02336-236"
+    ],
+    "cantos_documento_foto": [
+      [
+        166.2,
+        221.6
+      ],
+      [
+        1132.2,
+        204.6
+      ],
+      [
+        1173.3,
+        1552.1
+      ],
+      [
+        209.6,
+        1565.8
+      ]
+    ],
+    "condicao": "frontal",
+    "perturbacoes": {
+      "condicao": "frontal",
+      "perspectiva": 0.024,
+      "rotacao_graus": -1.67,
+      "brilho": 1.001,
+      "sombra": 0.0,
+      "desfoque": 0,
+      "ruido": 2.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 90
+    }
+  },
+  {
+    "id": "enel_03_inclinada",
+    "empresa": "enel",
+    "documento_limpo": "synthetic/documents/enel_03.png",
+    "foto": "synthetic/photos/enel_03_inclinada.jpg",
+    "cliente": "Tatiana Pacheco Gonçalves",
+    "endereco": {
+      "logradouro": "Avenida Conselheiro Nébias",
+      "numero": "2761",
+      "complemento": "",
+      "bairro": "Tatuapé",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "02059-796"
+    },
+    "linhas_impressas": [
+      "AVENIDA CONSELHEIRO NÉBIAS, 2761",
+      "TATUAPÉ",
+      "CEP 02059-796 - SÃO PAULO - SP"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1853,
+      0.6935,
+      0.2965
+    ],
+    "enderecos_distratores": [
+      "Avenida Joaquim Nabuco, 2704 - Itaim Bibi - Osasco/SP - CEP 06187-012",
+      "Rua Santos Dumont, 198 - Itaim Bibi - São Paulo/SP - CEP 02336-236"
+    ],
+    "cantos_documento_foto": [
+      [
+        51.1,
+        111.1
+      ],
+      [
+        1105.4,
+        179.9
+      ],
+      [
+        1106.5,
+        1556.6
+      ],
+      [
+        179.8,
+        1629.9
+      ]
+    ],
+    "condicao": "inclinada",
+    "perturbacoes": {
+      "condicao": "inclinada",
+      "perspectiva": 0.065,
+      "rotacao_graus": -1.91,
+      "brilho": 0.918,
+      "sombra": 0.126,
+      "desfoque": 3,
+      "ruido": 4.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 85
+    }
+  },
+  {
+    "id": "enel_03_dificil",
+    "empresa": "enel",
+    "documento_limpo": "synthetic/documents/enel_03.png",
+    "foto": "synthetic/photos/enel_03_dificil.jpg",
+    "cliente": "Tatiana Pacheco Gonçalves",
+    "endereco": {
+      "logradouro": "Avenida Conselheiro Nébias",
+      "numero": "2761",
+      "complemento": "",
+      "bairro": "Tatuapé",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "02059-796"
+    },
+    "linhas_impressas": [
+      "AVENIDA CONSELHEIRO NÉBIAS, 2761",
+      "TATUAPÉ",
+      "CEP 02059-796 - SÃO PAULO - SP"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1853,
+      0.6935,
+      0.2965
+    ],
+    "enderecos_distratores": [
+      "Avenida Joaquim Nabuco, 2704 - Itaim Bibi - Osasco/SP - CEP 06187-012",
+      "Rua Santos Dumont, 198 - Itaim Bibi - São Paulo/SP - CEP 02336-236"
+    ],
+    "cantos_documento_foto": [
+      [
+        494.2,
+        311.4
+      ],
+      [
+        1256.6,
+        446.1
+      ],
+      [
+        909.5,
+        1556.5
+      ],
+      [
+        29.3,
+        1428.3
+      ]
+    ],
+    "condicao": "dificil",
+    "perturbacoes": {
+      "condicao": "dificil",
+      "perspectiva": 0.139,
+      "rotacao_graus": 14.03,
+      "brilho": 0.694,
+      "sombra": 0.496,
+      "desfoque": 5,
+      "ruido": 8.0,
+      "fundo": "claro",
+      "qualidade_jpeg": 75
+    }
+  },
+  {
+    "id": "enel_04_frontal",
+    "empresa": "enel",
+    "documento_limpo": "synthetic/documents/enel_04.png",
+    "foto": "synthetic/photos/enel_04_frontal.jpg",
+    "cliente": "Isabela Lacerda Almeida",
+    "endereco": {
+      "logradouro": "Rua das Flores",
+      "numero": "2398",
+      "complemento": "Fundos",
+      "bairro": "Jardim Paulista",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "04825-185"
+    },
+    "linhas_impressas": [
+      "RUA DAS FLORES, 2398 - FUNDOS",
+      "JARDIM PAULISTA",
+      "CEP 04825-185 - SÃO PAULO - SP"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1853,
+      0.6935,
+      0.2965
+    ],
+    "enderecos_distratores": [
+      "Alameda Presidente Vargas, 521 - Tatuapé - Rio de Janeiro/RJ - CEP 21149-037",
+      "Travessa das Palmeiras, 2711 - Vila Nova - Osasco/SP - CEP 06076-134"
+    ],
+    "cantos_documento_foto": [
+      [
+        127.7,
+        206.5
+      ],
+      [
+        1163.3,
+        172.7
+      ],
+      [
+        1177.2,
+        1604.9
+      ],
+      [
+        194.1,
+        1628.6
+      ]
+    ],
+    "condicao": "frontal",
+    "perturbacoes": {
+      "condicao": "frontal",
+      "perspectiva": 0.025,
+      "rotacao_graus": -1.88,
+      "brilho": 1.002,
+      "sombra": 0.0,
+      "desfoque": 0,
+      "ruido": 2.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 90
+    }
+  },
+  {
+    "id": "enel_04_inclinada",
+    "empresa": "enel",
+    "documento_limpo": "synthetic/documents/enel_04.png",
+    "foto": "synthetic/photos/enel_04_inclinada.jpg",
+    "cliente": "Isabela Lacerda Almeida",
+    "endereco": {
+      "logradouro": "Rua das Flores",
+      "numero": "2398",
+      "complemento": "Fundos",
+      "bairro": "Jardim Paulista",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "04825-185"
+    },
+    "linhas_impressas": [
+      "RUA DAS FLORES, 2398 - FUNDOS",
+      "JARDIM PAULISTA",
+      "CEP 04825-185 - SÃO PAULO - SP"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1853,
+      0.6935,
+      0.2965
+    ],
+    "enderecos_distratores": [
+      "Alameda Presidente Vargas, 521 - Tatuapé - Rio de Janeiro/RJ - CEP 21149-037",
+      "Travessa das Palmeiras, 2711 - Vila Nova - Osasco/SP - CEP 06076-134"
+    ],
+    "cantos_documento_foto": [
+      [
+        254.6,
+        185.1
+      ],
+      [
+        1207.5,
+        281.3
+      ],
+      [
+        1186.5,
+        1650.5
+      ],
+      [
+        83.3,
+        1551.8
+      ]
+    ],
+    "condicao": "inclinada",
+    "perturbacoes": {
+      "condicao": "inclinada",
+      "perspectiva": 0.072,
+      "rotacao_graus": 4.25,
+      "brilho": 0.888,
+      "sombra": 0.152,
+      "desfoque": 3,
+      "ruido": 4.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 85
+    }
+  },
+  {
+    "id": "enel_04_dificil",
+    "empresa": "enel",
+    "documento_limpo": "synthetic/documents/enel_04.png",
+    "foto": "synthetic/photos/enel_04_dificil.jpg",
+    "cliente": "Isabela Lacerda Almeida",
+    "endereco": {
+      "logradouro": "Rua das Flores",
+      "numero": "2398",
+      "complemento": "Fundos",
+      "bairro": "Jardim Paulista",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "04825-185"
+    },
+    "linhas_impressas": [
+      "RUA DAS FLORES, 2398 - FUNDOS",
+      "JARDIM PAULISTA",
+      "CEP 04825-185 - SÃO PAULO - SP"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1853,
+      0.6935,
+      0.2965
+    ],
+    "enderecos_distratores": [
+      "Alameda Presidente Vargas, 521 - Tatuapé - Rio de Janeiro/RJ - CEP 21149-037",
+      "Travessa das Palmeiras, 2711 - Vila Nova - Osasco/SP - CEP 06076-134"
+    ],
+    "cantos_documento_foto": [
+      [
+        293.7,
+        145.3
+      ],
+      [
+        1267.5,
+        204.8
+      ],
+      [
+        1199.3,
+        1661.6
+      ],
+      [
+        233.0,
+        1554.5
+      ]
+    ],
+    "condicao": "dificil",
+    "perturbacoes": {
+      "condicao": "dificil",
+      "perspectiva": 0.093,
+      "rotacao_graus": 1.69,
+      "brilho": 0.635,
+      "sombra": 0.487,
+      "desfoque": 5,
+      "ruido": 8.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 75
+    }
+  },
+  {
+    "id": "sabesp_01_frontal",
+    "empresa": "sabesp",
+    "documento_limpo": "synthetic/documents/sabesp_01.png",
+    "foto": "synthetic/photos/sabesp_01_frontal.jpg",
+    "cliente": "Karina Barbosa Oliveira",
+    "endereco": {
+      "logradouro": "Alameda Voluntários da Pátria",
+      "numero": "742",
+      "complemento": "Casa 149",
+      "bairro": "Parque São Jorge",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "02633-675"
+    },
+    "linhas_impressas": [
+      "AL VOLUNTÁRIOS DA PÁTRIA, 742 CS 149 - PARQUE SÃO JORGE",
+      "SÃO PAULO - SP - 02633-675"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1779,
+      0.9597,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Rua João Batista de Oliveira, 1771 - Tatuapé - São Paulo/SP - CEP 01225-613",
+      "Alameda Voluntários da Pátria, 1400 - Tatuapé - Guarulhos/SP - CEP 07191-382"
+    ],
+    "cantos_documento_foto": [
+      [
+        164.8,
+        176.6
+      ],
+      [
+        1094.3,
+        181.3
+      ],
+      [
+        1110.3,
+        1509.8
+      ],
+      [
+        164.3,
+        1534.6
+      ]
+    ],
+    "condicao": "frontal",
+    "perturbacoes": {
+      "condicao": "frontal",
+      "perspectiva": 0.019,
+      "rotacao_graus": 0.21,
+      "brilho": 0.996,
+      "sombra": 0.0,
+      "desfoque": 0,
+      "ruido": 2.0,
+      "fundo": "escuro",
+      "qualidade_jpeg": 90
+    }
+  },
+  {
+    "id": "sabesp_01_inclinada",
+    "empresa": "sabesp",
+    "documento_limpo": "synthetic/documents/sabesp_01.png",
+    "foto": "synthetic/photos/sabesp_01_inclinada.jpg",
+    "cliente": "Karina Barbosa Oliveira",
+    "endereco": {
+      "logradouro": "Alameda Voluntários da Pátria",
+      "numero": "742",
+      "complemento": "Casa 149",
+      "bairro": "Parque São Jorge",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "02633-675"
+    },
+    "linhas_impressas": [
+      "AL VOLUNTÁRIOS DA PÁTRIA, 742 CS 149 - PARQUE SÃO JORGE",
+      "SÃO PAULO - SP - 02633-675"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1779,
+      0.9597,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Rua João Batista de Oliveira, 1771 - Tatuapé - São Paulo/SP - CEP 01225-613",
+      "Alameda Voluntários da Pátria, 1400 - Tatuapé - Guarulhos/SP - CEP 07191-382"
+    ],
+    "cantos_documento_foto": [
+      [
+        208.6,
+        270.2
+      ],
+      [
+        1102.9,
+        226.0
+      ],
+      [
+        1113.6,
+        1630.4
+      ],
+      [
+        96.0,
+        1714.8
+      ]
+    ],
+    "condicao": "inclinada",
+    "perturbacoes": {
+      "condicao": "inclinada",
+      "perspectiva": 0.089,
+      "rotacao_graus": 0.33,
+      "brilho": 0.892,
+      "sombra": 0.152,
+      "desfoque": 3,
+      "ruido": 4.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 85
+    }
+  },
+  {
+    "id": "sabesp_01_dificil",
+    "empresa": "sabesp",
+    "documento_limpo": "synthetic/documents/sabesp_01.png",
+    "foto": "synthetic/photos/sabesp_01_dificil.jpg",
+    "cliente": "Karina Barbosa Oliveira",
+    "endereco": {
+      "logradouro": "Alameda Voluntários da Pátria",
+      "numero": "742",
+      "complemento": "Casa 149",
+      "bairro": "Parque São Jorge",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "02633-675"
+    },
+    "linhas_impressas": [
+      "AL VOLUNTÁRIOS DA PÁTRIA, 742 CS 149 - PARQUE SÃO JORGE",
+      "SÃO PAULO - SP - 02633-675"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1779,
+      0.9597,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Rua João Batista de Oliveira, 1771 - Tatuapé - São Paulo/SP - CEP 01225-613",
+      "Alameda Voluntários da Pátria, 1400 - Tatuapé - Guarulhos/SP - CEP 07191-382"
+    ],
+    "cantos_documento_foto": [
+      [
+        19.4,
+        317.9
+      ],
+      [
+        1032.7,
+        107.9
+      ],
+      [
+        1279.1,
+        1433.5
+      ],
+      [
+        243.2,
+        1721.3
+      ]
+    ],
+    "condicao": "dificil",
+    "perturbacoes": {
+      "condicao": "dificil",
+      "perspectiva": 0.135,
+      "rotacao_graus": -12.74,
+      "brilho": 0.703,
+      "sombra": 0.444,
+      "desfoque": 5,
+      "ruido": 8.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 75
+    }
+  },
+  {
+    "id": "sabesp_02_frontal",
+    "empresa": "sabesp",
+    "documento_limpo": "synthetic/documents/sabesp_02.png",
+    "foto": "synthetic/photos/sabesp_02_frontal.jpg",
+    "cliente": "Sérgio Ramos Cardoso",
+    "endereco": {
+      "logradouro": "Avenida Castro Alves",
+      "numero": "253",
+      "complemento": "Casa 143",
+      "bairro": "Centro",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "01591-694"
+    },
+    "linhas_impressas": [
+      "AV CASTRO ALVES, 253 CS 143 - CENTRO",
+      "SÃO PAULO - SP - 01591-694"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1779,
+      0.9597,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Rua Carlos Gomes, 1676 - Tatuapé - São Paulo/SP - CEP 05426-702",
+      "Alameda Conselheiro Nébias, 898 - Jardim América - Santo André/SP - CEP 09232-665"
+    ],
+    "cantos_documento_foto": [
+      [
+        162.8,
+        163.5
+      ],
+      [
+        1210.6,
+        181.1
+      ],
+      [
+        1172.2,
+        1653.6
+      ],
+      [
+        148.5,
+        1627.1
+      ]
+    ],
+    "condicao": "frontal",
+    "perturbacoes": {
+      "condicao": "frontal",
+      "perspectiva": 0.011,
+      "rotacao_graus": 1.01,
+      "brilho": 0.956,
+      "sombra": 0.0,
+      "desfoque": 0,
+      "ruido": 2.0,
+      "fundo": "escuro",
+      "qualidade_jpeg": 90
+    }
+  },
+  {
+    "id": "sabesp_02_inclinada",
+    "empresa": "sabesp",
+    "documento_limpo": "synthetic/documents/sabesp_02.png",
+    "foto": "synthetic/photos/sabesp_02_inclinada.jpg",
+    "cliente": "Sérgio Ramos Cardoso",
+    "endereco": {
+      "logradouro": "Avenida Castro Alves",
+      "numero": "253",
+      "complemento": "Casa 143",
+      "bairro": "Centro",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "01591-694"
+    },
+    "linhas_impressas": [
+      "AV CASTRO ALVES, 253 CS 143 - CENTRO",
+      "SÃO PAULO - SP - 01591-694"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1779,
+      0.9597,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Rua Carlos Gomes, 1676 - Tatuapé - São Paulo/SP - CEP 05426-702",
+      "Alameda Conselheiro Nébias, 898 - Jardim América - Santo André/SP - CEP 09232-665"
+    ],
+    "cantos_documento_foto": [
+      [
+        94.8,
+        213.5
+      ],
+      [
+        991.2,
+        202.0
+      ],
+      [
+        1276.0,
+        1481.8
+      ],
+      [
+        226.7,
+        1654.1
+      ]
+    ],
+    "condicao": "inclinada",
+    "perturbacoes": {
+      "condicao": "inclinada",
+      "perspectiva": 0.08,
+      "rotacao_graus": -6.89,
+      "brilho": 0.867,
+      "sombra": 0.23,
+      "desfoque": 3,
+      "ruido": 4.0,
+      "fundo": "escuro",
+      "qualidade_jpeg": 85
+    }
+  },
+  {
+    "id": "sabesp_02_dificil",
+    "empresa": "sabesp",
+    "documento_limpo": "synthetic/documents/sabesp_02.png",
+    "foto": "synthetic/photos/sabesp_02_dificil.jpg",
+    "cliente": "Sérgio Ramos Cardoso",
+    "endereco": {
+      "logradouro": "Avenida Castro Alves",
+      "numero": "253",
+      "complemento": "Casa 143",
+      "bairro": "Centro",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "01591-694"
+    },
+    "linhas_impressas": [
+      "AV CASTRO ALVES, 253 CS 143 - CENTRO",
+      "SÃO PAULO - SP - 01591-694"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1779,
+      0.9597,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Rua Carlos Gomes, 1676 - Tatuapé - São Paulo/SP - CEP 05426-702",
+      "Alameda Conselheiro Nébias, 898 - Jardim América - Santo André/SP - CEP 09232-665"
+    ],
+    "cantos_documento_foto": [
+      [
+        142.7,
+        513.8
+      ],
+      [
+        844.5,
+        263.7
+      ],
+      [
+        1268.6,
+        1413.7
+      ],
+      [
+        401.2,
+        1587.5
+      ]
+    ],
+    "condicao": "dificil",
+    "perturbacoes": {
+      "condicao": "dificil",
+      "perspectiva": 0.132,
+      "rotacao_graus": -12.06,
+      "brilho": 0.609,
+      "sombra": 0.494,
+      "desfoque": 5,
+      "ruido": 8.0,
+      "fundo": "azul",
+      "qualidade_jpeg": 75
+    }
+  },
+  {
+    "id": "sabesp_03_frontal",
+    "empresa": "sabesp",
+    "documento_limpo": "synthetic/documents/sabesp_03.png",
+    "foto": "synthetic/photos/sabesp_03_frontal.jpg",
+    "cliente": "Olívia Gonçalves Ferraz",
+    "endereco": {
+      "logradouro": "Alameda José Bonifácio",
+      "numero": "773",
+      "complemento": "Bloco B Apto 174",
+      "bairro": "Vila Esperança",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "02665-494"
+    },
+    "linhas_impressas": [
+      "AL JOSÉ BONIFÁCIO, 773 BL B AP 174 - VILA ESPERANÇA",
+      "SÃO PAULO - SP - 02665-494"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1779,
+      0.9597,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Avenida Rio Branco, 2982 - Vila Mariana - São Paulo/SP - CEP 04980-031",
+      "Travessa Machado de Assis, 1384 - Jardim Primavera - Rio de Janeiro/RJ - CEP 23198-749"
+    ],
+    "cantos_documento_foto": [
+      [
+        153.3,
+        238.1
+      ],
+      [
+        1078.1,
+        248.1
+      ],
+      [
+        1090.1,
+        1579.9
+      ],
+      [
+        141.0,
+        1583.9
+      ]
+    ],
+    "condicao": "frontal",
+    "perturbacoes": {
+      "condicao": "frontal",
+      "perspectiva": 0.013,
+      "rotacao_graus": -0.47,
+      "brilho": 1.015,
+      "sombra": 0.0,
+      "desfoque": 0,
+      "ruido": 2.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 90
+    }
+  },
+  {
+    "id": "sabesp_03_inclinada",
+    "empresa": "sabesp",
+    "documento_limpo": "synthetic/documents/sabesp_03.png",
+    "foto": "synthetic/photos/sabesp_03_inclinada.jpg",
+    "cliente": "Olívia Gonçalves Ferraz",
+    "endereco": {
+      "logradouro": "Alameda José Bonifácio",
+      "numero": "773",
+      "complemento": "Bloco B Apto 174",
+      "bairro": "Vila Esperança",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "02665-494"
+    },
+    "linhas_impressas": [
+      "AL JOSÉ BONIFÁCIO, 773 BL B AP 174 - VILA ESPERANÇA",
+      "SÃO PAULO - SP - 02665-494"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1779,
+      0.9597,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Avenida Rio Branco, 2982 - Vila Mariana - São Paulo/SP - CEP 04980-031",
+      "Travessa Machado de Assis, 1384 - Jardim Primavera - Rio de Janeiro/RJ - CEP 23198-749"
+    ],
+    "cantos_documento_foto": [
+      [
+        44.1,
+        279.8
+      ],
+      [
+        1100.9,
+        111.9
+      ],
+      [
+        1246.8,
+        1521.4
+      ],
+      [
+        260.8,
+        1631.6
+      ]
+    ],
+    "condicao": "inclinada",
+    "perturbacoes": {
+      "condicao": "inclinada",
+      "perspectiva": 0.088,
+      "rotacao_graus": -7.35,
+      "brilho": 0.901,
+      "sombra": 0.171,
+      "desfoque": 3,
+      "ruido": 4.0,
+      "fundo": "escuro",
+      "qualidade_jpeg": 85
+    }
+  },
+  {
+    "id": "sabesp_03_dificil",
+    "empresa": "sabesp",
+    "documento_limpo": "synthetic/documents/sabesp_03.png",
+    "foto": "synthetic/photos/sabesp_03_dificil.jpg",
+    "cliente": "Olívia Gonçalves Ferraz",
+    "endereco": {
+      "logradouro": "Alameda José Bonifácio",
+      "numero": "773",
+      "complemento": "Bloco B Apto 174",
+      "bairro": "Vila Esperança",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "02665-494"
+    },
+    "linhas_impressas": [
+      "AL JOSÉ BONIFÁCIO, 773 BL B AP 174 - VILA ESPERANÇA",
+      "SÃO PAULO - SP - 02665-494"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1779,
+      0.9597,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Avenida Rio Branco, 2982 - Vila Mariana - São Paulo/SP - CEP 04980-031",
+      "Travessa Machado de Assis, 1384 - Jardim Primavera - Rio de Janeiro/RJ - CEP 23198-749"
+    ],
+    "cantos_documento_foto": [
+      [
+        117.4,
+        418.5
+      ],
+      [
+        905.1,
+        233.7
+      ],
+      [
+        1276.0,
+        1482.9
+      ],
+      [
+        351.2,
+        1625.1
+      ]
+    ],
+    "condicao": "dificil",
+    "perturbacoes": {
+      "condicao": "dificil",
+      "perspectiva": 0.117,
+      "rotacao_graus": -8.2,
+      "brilho": 0.742,
+      "sombra": 0.424,
+      "desfoque": 5,
+      "ruido": 8.0,
+      "fundo": "claro",
+      "qualidade_jpeg": 75
+    }
+  },
+  {
+    "id": "sabesp_04_frontal",
+    "empresa": "sabesp",
+    "documento_limpo": "synthetic/documents/sabesp_04.png",
+    "foto": "synthetic/photos/sabesp_04_frontal.jpg",
+    "cliente": "Henrique Junqueira Klein",
+    "endereco": {
+      "logradouro": "Alameda das Flores",
+      "numero": "101",
+      "complemento": "Sala 83",
+      "bairro": "Vila Nova",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "02243-490"
+    },
+    "linhas_impressas": [
+      "AL DAS FLORES, 101 SL 83 - VILA NOVA",
+      "SÃO PAULO - SP - 02243-490"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1779,
+      0.9597,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Rua Tiradentes, 1408 - Cidade Jardim - Rio de Janeiro/RJ - CEP 23392-575",
+      "Avenida Rui Barbosa, 1974 - Tatuapé - São Paulo/SP - CEP 05126-038"
+    ],
+    "cantos_documento_foto": [
+      [
+        157.3,
+        197.1
+      ],
+      [
+        1153.8,
+        236.1
+      ],
+      [
+        1139.0,
+        1648.2
+      ],
+      [
+        122.7,
+        1630.8
+      ]
+    ],
+    "condicao": "frontal",
+    "perturbacoes": {
+      "condicao": "frontal",
+      "perspectiva": 0.017,
+      "rotacao_graus": 0.98,
+      "brilho": 0.978,
+      "sombra": 0.0,
+      "desfoque": 0,
+      "ruido": 2.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 90
+    }
+  },
+  {
+    "id": "sabesp_04_inclinada",
+    "empresa": "sabesp",
+    "documento_limpo": "synthetic/documents/sabesp_04.png",
+    "foto": "synthetic/photos/sabesp_04_inclinada.jpg",
+    "cliente": "Henrique Junqueira Klein",
+    "endereco": {
+      "logradouro": "Alameda das Flores",
+      "numero": "101",
+      "complemento": "Sala 83",
+      "bairro": "Vila Nova",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "02243-490"
+    },
+    "linhas_impressas": [
+      "AL DAS FLORES, 101 SL 83 - VILA NOVA",
+      "SÃO PAULO - SP - 02243-490"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1779,
+      0.9597,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Rua Tiradentes, 1408 - Cidade Jardim - Rio de Janeiro/RJ - CEP 23392-575",
+      "Avenida Rui Barbosa, 1974 - Tatuapé - São Paulo/SP - CEP 05126-038"
+    ],
+    "cantos_documento_foto": [
+      [
+        170.5,
+        265.8
+      ],
+      [
+        1157.6,
+        284.3
+      ],
+      [
+        1096.2,
+        1658.7
+      ],
+      [
+        189.0,
+        1644.9
+      ]
+    ],
+    "condicao": "inclinada",
+    "perturbacoes": {
+      "condicao": "inclinada",
+      "perspectiva": 0.054,
+      "rotacao_graus": 0.99,
+      "brilho": 0.873,
+      "sombra": 0.11,
+      "desfoque": 3,
+      "ruido": 4.0,
+      "fundo": "escuro",
+      "qualidade_jpeg": 85
+    }
+  },
+  {
+    "id": "sabesp_04_dificil",
+    "empresa": "sabesp",
+    "documento_limpo": "synthetic/documents/sabesp_04.png",
+    "foto": "synthetic/photos/sabesp_04_dificil.jpg",
+    "cliente": "Henrique Junqueira Klein",
+    "endereco": {
+      "logradouro": "Alameda das Flores",
+      "numero": "101",
+      "complemento": "Sala 83",
+      "bairro": "Vila Nova",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "02243-490"
+    },
+    "linhas_impressas": [
+      "AL DAS FLORES, 101 SL 83 - VILA NOVA",
+      "SÃO PAULO - SP - 02243-490"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1779,
+      0.9597,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Rua Tiradentes, 1408 - Cidade Jardim - Rio de Janeiro/RJ - CEP 23392-575",
+      "Avenida Rui Barbosa, 1974 - Tatuapé - São Paulo/SP - CEP 05126-038"
+    ],
+    "cantos_documento_foto": [
+      [
+        20.9,
+        326.9
+      ],
+      [
+        993.1,
+        203.6
+      ],
+      [
+        1128.7,
+        1345.0
+      ],
+      [
+        363.0,
+        1559.0
+      ]
+    ],
+    "condicao": "dificil",
+    "perturbacoes": {
+      "condicao": "dificil",
+      "perspectiva": 0.093,
+      "rotacao_graus": -10.61,
+      "brilho": 0.688,
+      "sombra": 0.492,
+      "desfoque": 5,
+      "ruido": 8.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 75
+    }
+  },
+  {
+    "id": "claro_01_frontal",
+    "empresa": "claro",
+    "documento_limpo": "synthetic/documents/claro_01.png",
+    "foto": "synthetic/photos/claro_01_frontal.jpg",
+    "cliente": "Karina Ramos Horta",
+    "endereco": {
+      "logradouro": "Rua Dom Pedro II",
+      "numero": "577",
+      "complemento": "Sala 158",
+      "bairro": "Vila Mariana",
+      "cidade": "Santo André",
+      "uf": "SP",
+      "cep": "09048-553"
+    },
+    "linhas_impressas": [
+      "Rua Dom Pedro II, 577 - Sala 158",
+      "Vila Mariana - Santo André/SP",
+      "CEP 09048-553"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1528,
+      0.5403,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Alameda Voluntários da Pátria, 1729 - Centro - São Bernardo do Campo/SP - CEP 09764-770",
+      "Alameda Barão de Itapetininga, 888 - Tatuapé - Osasco/SP - CEP 06103-386"
+    ],
+    "cantos_documento_foto": [
+      [
+        156.8,
+        204.1
+      ],
+      [
+        1185.1,
+        218.0
+      ],
+      [
+        1138.0,
+        1656.9
+      ],
+      [
+        120.8,
+        1635.9
+      ]
+    ],
+    "condicao": "frontal",
+    "perturbacoes": {
+      "condicao": "frontal",
+      "perspectiva": 0.019,
+      "rotacao_graus": 1.88,
+      "brilho": 0.988,
+      "sombra": 0.0,
+      "desfoque": 0,
+      "ruido": 2.0,
+      "fundo": "escuro",
+      "qualidade_jpeg": 90
+    }
+  },
+  {
+    "id": "claro_01_inclinada",
+    "empresa": "claro",
+    "documento_limpo": "synthetic/documents/claro_01.png",
+    "foto": "synthetic/photos/claro_01_inclinada.jpg",
+    "cliente": "Karina Ramos Horta",
+    "endereco": {
+      "logradouro": "Rua Dom Pedro II",
+      "numero": "577",
+      "complemento": "Sala 158",
+      "bairro": "Vila Mariana",
+      "cidade": "Santo André",
+      "uf": "SP",
+      "cep": "09048-553"
+    },
+    "linhas_impressas": [
+      "Rua Dom Pedro II, 577 - Sala 158",
+      "Vila Mariana - Santo André/SP",
+      "CEP 09048-553"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1528,
+      0.5403,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Alameda Voluntários da Pátria, 1729 - Centro - São Bernardo do Campo/SP - CEP 09764-770",
+      "Alameda Barão de Itapetininga, 888 - Tatuapé - Osasco/SP - CEP 06103-386"
+    ],
+    "cantos_documento_foto": [
+      [
+        200.2,
+        200.8
+      ],
+      [
+        1147.2,
+        164.6
+      ],
+      [
+        1210.7,
+        1561.1
+      ],
+      [
+        242.9,
+        1509.5
+      ]
+    ],
+    "condicao": "inclinada",
+    "perturbacoes": {
+      "condicao": "inclinada",
+      "perspectiva": 0.059,
+      "rotacao_graus": -1.02,
+      "brilho": 0.925,
+      "sombra": 0.212,
+      "desfoque": 3,
+      "ruido": 4.0,
+      "fundo": "escuro",
+      "qualidade_jpeg": 85
+    }
+  },
+  {
+    "id": "claro_01_dificil",
+    "empresa": "claro",
+    "documento_limpo": "synthetic/documents/claro_01.png",
+    "foto": "synthetic/photos/claro_01_dificil.jpg",
+    "cliente": "Karina Ramos Horta",
+    "endereco": {
+      "logradouro": "Rua Dom Pedro II",
+      "numero": "577",
+      "complemento": "Sala 158",
+      "bairro": "Vila Mariana",
+      "cidade": "Santo André",
+      "uf": "SP",
+      "cep": "09048-553"
+    },
+    "linhas_impressas": [
+      "Rua Dom Pedro II, 577 - Sala 158",
+      "Vila Mariana - Santo André/SP",
+      "CEP 09048-553"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1528,
+      0.5403,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Alameda Voluntários da Pátria, 1729 - Centro - São Bernardo do Campo/SP - CEP 09764-770",
+      "Alameda Barão de Itapetininga, 888 - Tatuapé - Osasco/SP - CEP 06103-386"
+    ],
+    "cantos_documento_foto": [
+      [
+        36.1,
+        302.1
+      ],
+      [
+        949.8,
+        186.0
+      ],
+      [
+        1244.2,
+        1475.8
+      ],
+      [
+        352.5,
+        1705.2
+      ]
+    ],
+    "condicao": "dificil",
+    "perturbacoes": {
+      "condicao": "dificil",
+      "perspectiva": 0.101,
+      "rotacao_graus": -13.19,
+      "brilho": 0.679,
+      "sombra": 0.353,
+      "desfoque": 5,
+      "ruido": 8.0,
+      "fundo": "claro",
+      "qualidade_jpeg": 75
+    }
+  },
+  {
+    "id": "claro_02_frontal",
+    "empresa": "claro",
+    "documento_limpo": "synthetic/documents/claro_02.png",
+    "foto": "synthetic/photos/claro_02_frontal.jpg",
+    "cliente": "Elisa Domingues Menezes",
+    "endereco": {
+      "logradouro": "Rua Joaquim Nabuco",
+      "numero": "1985",
+      "complemento": "",
+      "bairro": "Vila Mariana",
+      "cidade": "Belo Horizonte",
+      "uf": "MG",
+      "cep": "31790-122"
+    },
+    "linhas_impressas": [
+      "Rua Joaquim Nabuco, 1985",
+      "Vila Mariana - Belo Horizonte/MG",
+      "CEP 31790-122"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1528,
+      0.5403,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Alameda Machado de Assis, 2958 - Vila Esperança - Belo Horizonte/MG - CEP 30817-349",
+      "Rua Rio Branco, 1976 - Bela Vista - São Paulo/SP - CEP 05500-427"
+    ],
+    "cantos_documento_foto": [
+      [
+        121.4,
+        119.3
+      ],
+      [
+        1154.6,
+        133.5
+      ],
+      [
+        1109.0,
+        1635.4
+      ],
+      [
+        92.7,
+        1587.5
+      ]
+    ],
+    "condicao": "frontal",
+    "perturbacoes": {
+      "condicao": "frontal",
+      "perspectiva": 0.023,
+      "rotacao_graus": 0.82,
+      "brilho": 1.012,
+      "sombra": 0.0,
+      "desfoque": 0,
+      "ruido": 2.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 90
+    }
+  },
+  {
+    "id": "claro_02_inclinada",
+    "empresa": "claro",
+    "documento_limpo": "synthetic/documents/claro_02.png",
+    "foto": "synthetic/photos/claro_02_inclinada.jpg",
+    "cliente": "Elisa Domingues Menezes",
+    "endereco": {
+      "logradouro": "Rua Joaquim Nabuco",
+      "numero": "1985",
+      "complemento": "",
+      "bairro": "Vila Mariana",
+      "cidade": "Belo Horizonte",
+      "uf": "MG",
+      "cep": "31790-122"
+    },
+    "linhas_impressas": [
+      "Rua Joaquim Nabuco, 1985",
+      "Vila Mariana - Belo Horizonte/MG",
+      "CEP 31790-122"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1528,
+      0.5403,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Alameda Machado de Assis, 2958 - Vila Esperança - Belo Horizonte/MG - CEP 30817-349",
+      "Rua Rio Branco, 1976 - Bela Vista - São Paulo/SP - CEP 05500-427"
+    ],
+    "cantos_documento_foto": [
+      [
+        151.7,
+        216.0
+      ],
+      [
+        1089.1,
+        252.9
+      ],
+      [
+        1176.1,
+        1609.9
+      ],
+      [
+        188.9,
+        1619.0
+      ]
+    ],
+    "condicao": "inclinada",
+    "perturbacoes": {
+      "condicao": "inclinada",
+      "perspectiva": 0.054,
+      "rotacao_graus": -0.74,
+      "brilho": 0.89,
+      "sombra": 0.216,
+      "desfoque": 3,
+      "ruido": 4.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 85
+    }
+  },
+  {
+    "id": "claro_02_dificil",
+    "empresa": "claro",
+    "documento_limpo": "synthetic/documents/claro_02.png",
+    "foto": "synthetic/photos/claro_02_dificil.jpg",
+    "cliente": "Elisa Domingues Menezes",
+    "endereco": {
+      "logradouro": "Rua Joaquim Nabuco",
+      "numero": "1985",
+      "complemento": "",
+      "bairro": "Vila Mariana",
+      "cidade": "Belo Horizonte",
+      "uf": "MG",
+      "cep": "31790-122"
+    },
+    "linhas_impressas": [
+      "Rua Joaquim Nabuco, 1985",
+      "Vila Mariana - Belo Horizonte/MG",
+      "CEP 31790-122"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1528,
+      0.5403,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Alameda Machado de Assis, 2958 - Vila Esperança - Belo Horizonte/MG - CEP 30817-349",
+      "Rua Rio Branco, 1976 - Bela Vista - São Paulo/SP - CEP 05500-427"
+    ],
+    "cantos_documento_foto": [
+      [
+        29.8,
+        398.3
+      ],
+      [
+        1013.6,
+        126.9
+      ],
+      [
+        1217.4,
+        1417.7
+      ],
+      [
+        481.4,
+        1701.0
+      ]
+    ],
+    "condicao": "dificil",
+    "perturbacoes": {
+      "condicao": "dificil",
+      "perspectiva": 0.119,
+      "rotacao_graus": -14.4,
+      "brilho": 0.638,
+      "sombra": 0.318,
+      "desfoque": 5,
+      "ruido": 8.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 75
+    }
+  },
+  {
+    "id": "claro_03_frontal",
+    "empresa": "claro",
+    "documento_limpo": "synthetic/documents/claro_03.png",
+    "foto": "synthetic/photos/claro_03_frontal.jpg",
+    "cliente": "Renata Queiroz Queiroz",
+    "endereco": {
+      "logradouro": "Rua Barão de Itapetininga",
+      "numero": "2480",
+      "complemento": "Casa 37",
+      "bairro": "Centro",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "02789-365"
+    },
+    "linhas_impressas": [
+      "Rua Barão de Itapetininga, 2480 - Casa 37",
+      "Centro - São Paulo/SP",
+      "CEP 02789-365"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1528,
+      0.5403,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Rua Dom Pedro II, 28 - Liberdade - Santo André/SP - CEP 09172-844",
+      "Travessa Castro Alves, 2864 - Jardim Primavera - São Paulo/SP - CEP 05974-720"
+    ],
+    "cantos_documento_foto": [
+      [
+        173.5,
+        281.7
+      ],
+      [
+        1147.9,
+        247.4
+      ],
+      [
+        1164.3,
+        1614.1
+      ],
+      [
+        200.8,
+        1621.6
+      ]
+    ],
+    "condicao": "frontal",
+    "perturbacoes": {
+      "condicao": "frontal",
+      "perspectiva": 0.018,
+      "rotacao_graus": -0.69,
+      "brilho": 0.975,
+      "sombra": 0.0,
+      "desfoque": 0,
+      "ruido": 2.0,
+      "fundo": "escuro",
+      "qualidade_jpeg": 90
+    }
+  },
+  {
+    "id": "claro_03_inclinada",
+    "empresa": "claro",
+    "documento_limpo": "synthetic/documents/claro_03.png",
+    "foto": "synthetic/photos/claro_03_inclinada.jpg",
+    "cliente": "Renata Queiroz Queiroz",
+    "endereco": {
+      "logradouro": "Rua Barão de Itapetininga",
+      "numero": "2480",
+      "complemento": "Casa 37",
+      "bairro": "Centro",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "02789-365"
+    },
+    "linhas_impressas": [
+      "Rua Barão de Itapetininga, 2480 - Casa 37",
+      "Centro - São Paulo/SP",
+      "CEP 02789-365"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1528,
+      0.5403,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Rua Dom Pedro II, 28 - Liberdade - Santo André/SP - CEP 09172-844",
+      "Travessa Castro Alves, 2864 - Jardim Primavera - São Paulo/SP - CEP 05974-720"
+    ],
+    "cantos_documento_foto": [
+      [
+        71.2,
+        227.4
+      ],
+      [
+        1003.9,
+        132.0
+      ],
+      [
+        1131.1,
+        1535.4
+      ],
+      [
+        175.9,
+        1628.6
+      ]
+    ],
+    "condicao": "inclinada",
+    "perturbacoes": {
+      "condicao": "inclinada",
+      "perspectiva": 0.052,
+      "rotacao_graus": -5.68,
+      "brilho": 0.869,
+      "sombra": 0.167,
+      "desfoque": 3,
+      "ruido": 4.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 85
+    }
+  },
+  {
+    "id": "claro_03_dificil",
+    "empresa": "claro",
+    "documento_limpo": "synthetic/documents/claro_03.png",
+    "foto": "synthetic/photos/claro_03_dificil.jpg",
+    "cliente": "Renata Queiroz Queiroz",
+    "endereco": {
+      "logradouro": "Rua Barão de Itapetininga",
+      "numero": "2480",
+      "complemento": "Casa 37",
+      "bairro": "Centro",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "cep": "02789-365"
+    },
+    "linhas_impressas": [
+      "Rua Barão de Itapetininga, 2480 - Casa 37",
+      "Centro - São Paulo/SP",
+      "CEP 02789-365"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1528,
+      0.5403,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Rua Dom Pedro II, 28 - Liberdade - Santo André/SP - CEP 09172-844",
+      "Travessa Castro Alves, 2864 - Jardim Primavera - São Paulo/SP - CEP 05974-720"
+    ],
+    "cantos_documento_foto": [
+      [
+        286.0,
+        143.5
+      ],
+      [
+        1168.5,
+        300.1
+      ],
+      [
+        975.4,
+        1616.3
+      ],
+      [
+        21.5,
+        1488.3
+      ]
+    ],
+    "condicao": "dificil",
+    "perturbacoes": {
+      "condicao": "dificil",
+      "perspectiva": 0.093,
+      "rotacao_graus": 8.53,
+      "brilho": 0.725,
+      "sombra": 0.423,
+      "desfoque": 5,
+      "ruido": 8.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 75
+    }
+  },
+  {
+    "id": "claro_04_frontal",
+    "empresa": "claro",
+    "documento_limpo": "synthetic/documents/claro_04.png",
+    "foto": "synthetic/photos/claro_04_frontal.jpg",
+    "cliente": "Olívia Gonçalves Esteves",
+    "endereco": {
+      "logradouro": "Travessa Padre Anchieta",
+      "numero": "2801",
+      "complemento": "",
+      "bairro": "Parque São Jorge",
+      "cidade": "Campinas",
+      "uf": "SP",
+      "cep": "13041-093"
+    },
+    "linhas_impressas": [
+      "Travessa Padre Anchieta, 2801",
+      "Parque São Jorge - Campinas/SP",
+      "CEP 13041-093"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1528,
+      0.5403,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Travessa Castro Alves, 872 - Vila Mariana - Campinas/SP - CEP 13027-142",
+      "Alameda dos Ipês, 1716 - Parque São Jorge - Curitiba/PR - CEP 81539-468"
+    ],
+    "cantos_documento_foto": [
+      [
+        192.5,
+        178.1
+      ],
+      [
+        1188.5,
+        186.0
+      ],
+      [
+        1177.1,
+        1610.2
+      ],
+      [
+        149.6,
+        1574.3
+      ]
+    ],
+    "condicao": "frontal",
+    "perturbacoes": {
+      "condicao": "frontal",
+      "perspectiva": 0.022,
+      "rotacao_graus": 0.59,
+      "brilho": 0.958,
+      "sombra": 0.0,
+      "desfoque": 0,
+      "ruido": 2.0,
+      "fundo": "madeira",
+      "qualidade_jpeg": 90
+    }
+  },
+  {
+    "id": "claro_04_inclinada",
+    "empresa": "claro",
+    "documento_limpo": "synthetic/documents/claro_04.png",
+    "foto": "synthetic/photos/claro_04_inclinada.jpg",
+    "cliente": "Olívia Gonçalves Esteves",
+    "endereco": {
+      "logradouro": "Travessa Padre Anchieta",
+      "numero": "2801",
+      "complemento": "",
+      "bairro": "Parque São Jorge",
+      "cidade": "Campinas",
+      "uf": "SP",
+      "cep": "13041-093"
+    },
+    "linhas_impressas": [
+      "Travessa Padre Anchieta, 2801",
+      "Parque São Jorge - Campinas/SP",
+      "CEP 13041-093"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1528,
+      0.5403,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Travessa Castro Alves, 872 - Vila Mariana - Campinas/SP - CEP 13027-142",
+      "Alameda dos Ipês, 1716 - Parque São Jorge - Curitiba/PR - CEP 81539-468"
+    ],
+    "cantos_documento_foto": [
+      [
+        123.3,
+        225.3
+      ],
+      [
+        1185.9,
+        267.7
+      ],
+      [
+        1150.8,
+        1677.4
+      ],
+      [
+        147.4,
+        1552.2
+      ]
+    ],
+    "condicao": "inclinada",
+    "perturbacoes": {
+      "condicao": "inclinada",
+      "perspectiva": 0.074,
+      "rotacao_graus": 2.81,
+      "brilho": 0.95,
+      "sombra": 0.226,
+      "desfoque": 3,
+      "ruido": 4.0,
+      "fundo": "azul",
+      "qualidade_jpeg": 85
+    }
+  },
+  {
+    "id": "claro_04_dificil",
+    "empresa": "claro",
+    "documento_limpo": "synthetic/documents/claro_04.png",
+    "foto": "synthetic/photos/claro_04_dificil.jpg",
+    "cliente": "Olívia Gonçalves Esteves",
+    "endereco": {
+      "logradouro": "Travessa Padre Anchieta",
+      "numero": "2801",
+      "complemento": "",
+      "bairro": "Parque São Jorge",
+      "cidade": "Campinas",
+      "uf": "SP",
+      "cep": "13041-093"
+    },
+    "linhas_impressas": [
+      "Travessa Padre Anchieta, 2801",
+      "Parque São Jorge - Campinas/SP",
+      "CEP 13041-093"
+    ],
+    "regiao_endereco": [
+      0.0403,
+      0.1528,
+      0.5403,
+      0.2395
+    ],
+    "enderecos_distratores": [
+      "Travessa Castro Alves, 872 - Vila Mariana - Campinas/SP - CEP 13027-142",
+      "Alameda dos Ipês, 1716 - Parque São Jorge - Curitiba/PR - CEP 81539-468"
+    ],
+    "cantos_documento_foto": [
+      [
+        94.4,
+        177.2
+      ],
+      [
+        1201.0,
+        218.3
+      ],
+      [
+        1128.7,
+        1638.6
+      ],
+      [
+        27.7,
+        1641.2
+      ]
+    ],
+    "condicao": "dificil",
+    "perturbacoes": {
+      "condicao": "dificil",
+      "perspectiva": 0.117,
+      "rotacao_graus": -0.31,
+      "brilho": 0.607,
+      "sombra": 0.397,
+      "desfoque": 5,
+      "ruido": 8.0,
+      "fundo": "azul",
+      "qualidade_jpeg": 75
+    }
+  }
+]

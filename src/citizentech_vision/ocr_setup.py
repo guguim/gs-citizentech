@@ -1,5 +1,3 @@
-"""Configuração e verificação do Tesseract OCR."""
-
 import os
 import shutil
 from pathlib import Path
@@ -16,11 +14,6 @@ MENSAGEM_NAO_ENCONTRADO = (
 
 
 def find_tesseract():
-    """Retorna o caminho do executável do Tesseract, ou None se não achar.
-
-    Ordem de busca: variável de ambiente TESSERACT_CMD, PATH do sistema e
-    instalação padrão do Windows.
-    """
     do_ambiente = os.environ.get("TESSERACT_CMD")
     if do_ambiente and Path(do_ambiente).is_file():
         return do_ambiente
@@ -36,7 +29,6 @@ def find_tesseract():
 
 
 def configure_tesseract():
-    """Aponta o pytesseract para o executável e devolve o caminho usado."""
     caminho = find_tesseract()
     if caminho is None:
         raise RuntimeError(MENSAGEM_NAO_ENCONTRADO)
@@ -45,12 +37,10 @@ def configure_tesseract():
 
 
 def available_languages():
-    """Lista os idiomas instalados no Tesseract (ex.: ['eng', 'por'])."""
     configure_tesseract()
     return pytesseract.get_languages(config="")
 
 
 def tesseract_version():
-    """Retorna a versão do Tesseract como texto."""
     configure_tesseract()
     return str(pytesseract.get_tesseract_version())
