@@ -1,0 +1,196 @@
+:root {
+  --fundo: #f4f6f9;
+  --superficie: #ffffff;
+  --texto: #1a2332;
+  --texto-suave: #4a5568;
+  --borda: #c3ccd9;
+  --primaria: #0b5cab;
+  --primaria-texto: #ffffff;
+  --primaria-forte: #084a8a;
+  --foco: #ffb000;
+  --aviso-fundo: #fff4d6;
+  --aviso-borda: #a85d00;
+  --aviso-texto: #5c3300;
+  --erro: #b3261e;
+  --ok: #1b6e3b;
+  --ok-fundo: #e5f4ea;
+  --raio: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fundo: #0f1620;
+    --superficie: #182231;
+    --texto: #eef2f7;
+    --texto-suave: #b4c0d0;
+    --borda: #3b4a60;
+    --primaria: #6cb2f5;
+    --primaria-texto: #08203a;
+    --primaria-forte: #8cc4f8;
+    --aviso-fundo: #3a2c0c;
+    --aviso-borda: #f0b04a;
+    --aviso-texto: #ffe3b0;
+    --erro: #ff9b92;
+    --ok: #7fd9a0;
+    --ok-fundo: #12301f;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { font-size: 112.5%; }
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+.topo { background: var(--superficie); border-bottom: 1px solid var(--borda); }
+
+.topo-conteudo {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 0.9rem 1rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.marca { font-weight: 800; font-size: 1.3rem; color: var(--primaria); letter-spacing: 0.01em; }
+.topo-nota { color: var(--texto-suave); font-size: 0.85rem; }
+
+main { max-width: 44rem; margin: 0 auto; padding: 1.25rem 1rem 3rem; }
+
+.cartao {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 1.5rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.etapa { margin: 0 0 0.25rem; color: var(--texto-suave); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+
+h1 { margin: 0 0 0.5rem; font-size: 1.5rem; line-height: 1.25; }
+h1:focus { outline: none; }
+
+.apoio { margin: 0 0 1.25rem; color: var(--texto-suave); }
+
+.seletor {
+  display: block;
+  border: 2px dashed var(--borda);
+  border-radius: var(--raio);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  background: var(--fundo);
+}
+
+.seletor:hover { border-color: var(--primaria); }
+.seletor-titulo { display: block; font-weight: 700; color: var(--primaria); }
+.seletor-dica { display: block; font-size: 0.85rem; color: var(--texto-suave); word-break: break-all; }
+
+#foto { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+.seletor:has(+ #foto:focus-visible) { outline: 3px solid var(--foco); outline-offset: 2px; }
+
+.previa {
+  display: block;
+  max-width: 100%;
+  max-height: 16rem;
+  margin: 1rem auto 0;
+  border-radius: 8px;
+  border: 1px solid var(--borda);
+}
+
+.acoes { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+
+.botao {
+  font: inherit;
+  font-weight: 700;
+  min-height: 3rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: 10px;
+  border: 2px solid var(--primaria);
+  background: var(--primaria);
+  color: var(--primaria-texto);
+  cursor: pointer;
+}
+
+.botao:hover:not(:disabled) { background: var(--primaria-forte); border-color: var(--primaria-forte); }
+.botao.secundario { background: transparent; color: var(--primaria); }
+.botao.secundario:hover:not(:disabled) { background: var(--fundo); color: var(--primaria-forte); }
+.botao:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.botao:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+
+.privacidade { margin: 1.25rem 0 0; padding-top: 1rem; border-top: 1px solid var(--borda); font-size: 0.85rem; color: var(--texto-suave); }
+
+.resumo { margin: 0.5rem 0 1rem; }
+.resumo-linha { margin: 0 0 0.5rem; font-weight: 600; }
+
+.barra { height: 0.6rem; border-radius: 999px; background: var(--borda); overflow: hidden; }
+.barra-preenchida { height: 100%; width: 0; background: var(--ok); transition: width 0.4s ease; }
+.barra.baixa .barra-preenchida { background: var(--aviso-borda); }
+
+.aviso {
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 1rem;
+  border-left: 5px solid var(--aviso-borda);
+  background: var(--aviso-fundo);
+  color: var(--aviso-texto);
+  border-radius: 6px;
+}
+
+.grade { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.campo.larga { grid-column: 1 / -1; }
+
+@media (max-width: 30rem) {
+  .grade { grid-template-columns: minmax(0, 1fr); }
+}
+
+.campo label { display: block; font-weight: 700; margin-bottom: 0.25rem; }
+.opcional { font-weight: 400; color: var(--texto-suave); }
+
+.campo input {
+  width: 100%;
+  min-height: 3rem;
+  font: inherit;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--borda);
+  border-radius: 8px;
+  background: var(--superficie);
+  color: var(--texto);
+}
+
+.campo.revisar input { border-color: var(--aviso-borda); background: var(--aviso-fundo); color: var(--aviso-texto); }
+.campo.invalido input { border-color: var(--erro); }
+
+.dica { margin: 0.25rem 0 0; font-size: 0.8rem; color: var(--texto-suave); }
+
+.marca-revisao { margin: 0.25rem 0 0; font-size: 0.85rem; font-weight: 700; color: var(--aviso-texto); }
+.marca-revisao::before { content: "⚠ "; }
+
+.erro { margin: 0.25rem 0 0; font-size: 0.85rem; font-weight: 600; color: var(--erro); }
+.erro::before { content: "✖ "; }
+
+.confirmado { border-color: var(--ok); }
+.selo { display: inline-block; margin: 0 0 0.5rem; padding: 0.2rem 0.7rem; border-radius: 999px; background: var(--ok-fundo); color: var(--ok); font-weight: 700; font-size: 0.85rem; }
+
+.salvo { margin: 0 0 1rem; display: grid; grid-template-columns: max-content 1fr; gap: 0.4rem 1rem; }
+.salvo dt { font-weight: 700; color: var(--texto-suave); }
+.salvo dd { margin: 0; font-weight: 600; }
+
+details { margin-top: 0.5rem; }
+summary { cursor: pointer; font-weight: 600; color: var(--primaria); }
+pre { overflow-x: auto; padding: 0.75rem; border-radius: 8px; background: var(--fundo); border: 1px solid var(--borda); font-size: 0.8rem; }
+
+[hidden] { display: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .barra-preenchida { transition: none; }
+}

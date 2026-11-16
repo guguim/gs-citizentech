@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ZelaAí · Cadastro do endereço</title>
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <span class="marca">ZelaAí</span>
+      <span class="topo-nota">Demonstração da leitura de comprovante</span>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="cartao" id="etapa-envio" aria-labelledby="titulo-envio">
+      <p class="etapa">Passo 1 de 2</p>
+      <h1 id="titulo-envio">Envie a foto da sua conta</h1>
+      <p class="apoio">Pode ser conta de luz (Enel), de água (Sabesp) ou de telefone (Claro). Vamos ler o endereço e você confere antes de salvar.</p>
+
+      <form id="form-envio" novalidate>
+        <label class="seletor" for="foto">
+          <span class="seletor-titulo">Escolher ou fotografar a conta</span>
+          <span class="seletor-dica" id="foto-nome">JPG, PNG ou WEBP, até 5 MB</span>
+        </label>
+        <input type="file" id="foto" name="imagem" accept="image/jpeg,image/png,image/webp" capture="environment">
+        <img id="previa" class="previa" alt="Prévia da foto escolhida" hidden>
+        <p class="erro" id="erro-envio" role="alert" hidden></p>
+        <div class="acoes">
+          <button type="submit" class="botao" id="botao-ler" disabled>Ler endereço</button>
+          <button type="button" class="botao secundario" id="botao-manual">Prefiro digitar</button>
+        </div>
+      </form>
+
+      <p class="privacidade">A foto é lida na memória e <strong>não é guardada</strong>. Depois da sua confirmação, salvamos apenas bairro, CEP e cidade.</p>
+    </section>
+
+    <section class="cartao" id="etapa-confirmacao" aria-labelledby="titulo-confirmacao" hidden>
+      <p class="etapa">Passo 2 de 2</p>
+      <h1 id="titulo-confirmacao" tabindex="-1">Confira o seu endereço</h1>
+
+      <div class="resumo" id="resumo" aria-live="polite">
+        <p class="resumo-linha" id="resumo-texto"></p>
+        <div class="barra" id="barra" aria-hidden="true"><div class="barra-preenchida" id="barra-preenchida"></div></div>
+      </div>
+      <p class="aviso" id="aviso" hidden></p>
+
+      <form id="form-endereco" novalidate>
+        <div class="grade">
+          <div class="campo" data-campo="cep">
+            <label for="cep">CEP</label>
+            <input id="cep" name="cep" inputmode="numeric" autocomplete="postal-code" maxlength="9" aria-describedby="dica-cep erro-cep">
+            <p class="dica" id="dica-cep">Só os 8 números</p>
+            <p class="marca-revisao" hidden>Confira este campo</p>
+            <p class="erro" id="erro-cep" hidden></p>
+          </div>
+          <div class="campo" data-campo="numero">
+            <label for="numero">Número</label>
+            <input id="numero" name="numero" inputmode="numeric" autocomplete="off">
+            <p class="marca-revisao" hidden>Confira este campo</p>
+          </div>
+          <div class="campo larga" data-campo="logradouro">
+            <label for="logradouro">Rua ou avenida</label>
+            <input id="logradouro" name="logradouro" autocomplete="street-address">
+            <p class="marca-revisao" hidden>Confira este campo</p>
+          </div>
+          <div class="campo" data-campo="complemento">
+            <label for="complemento">Complemento <span class="opcional">(opcional)</span></label>
+            <input id="complemento" name="complemento" autocomplete="off">
+            <p class="marca-revisao" hidden>Confira este campo</p>
+          </div>
+          <div class="campo" data-campo="bairro">
+            <label for="bairro">Bairro</label>
+            <input id="bairro" name="bairro" autocomplete="address-level3" aria-describedby="erro-bairro">
+            <p class="marca-revisao" hidden>Confira este campo</p>
+            <p class="erro" id="erro-bairro" hidden></p>
+          </div>
+          <div class="campo" data-campo="cidade">
+            <label for="cidade">Cidade</label>
+            <input id="cidade" name="cidade" autocomplete="address-level2" aria-describedby="erro-cidade">
+            <p class="marca-revisao" hidden>Confira este campo</p>
+            <p class="erro" id="erro-cidade" hidden></p>
+          </div>
+          <div class="campo curta" data-campo="uf">
+            <label for="uf">UF</label>
+            <input id="uf" name="uf" maxlength="2" autocomplete="address-level1">
+            <p class="marca-revisao" hidden>Confira este campo</p>
+          </div>
+        </div>
+
+        <div class="acoes">
+          <button type="submit" class="botao">Confirmar endereço</button>
+          <button type="button" class="botao secundario" id="botao-voltar">Enviar outra foto</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="cartao confirmado" id="etapa-final" aria-labelledby="titulo-final" hidden>
+      <p class="selo">Endereço confirmado</p>
+      <h1 id="titulo-final" tabindex="-1">Tudo certo!</h1>
+      <p class="apoio">É isto que o ZelaAí envia para salvar no seu cadastro. Os demais dados da conta não são guardados.</p>
+
+      <dl class="salvo" id="salvo"></dl>
+      <details>
+        <summary>Ver a requisição enviada à API</summary>
+        <pre id="requisicao"></pre>
+      </details>
+
+      <div class="acoes">
+        <button type="button" class="botao" id="botao-novo">Cadastrar outro endereço</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="demo.js"></script>
+</body>
+</html>

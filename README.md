@@ -44,6 +44,7 @@ src/citizentech_vision/   código do componente
   voting.py               votação entre variantes de pré-processamento
   extraction.py           pipeline de extração do endereço do cliente
   api.py                  serviço HTTP (FastAPI) que o ZelaAí consome
+  demo/                   página de confirmação e correção do endereço (modo demonstração)
   textmatch.py            comparação aproximada de textos
   cities.py               lista de cidades conhecidas para corrigir o OCR
   metrics.py              métricas de avaliação (detecção e OCR)
@@ -107,6 +108,7 @@ No plano B a API responde `fonte: "manual"` e orienta o cidadão a preencher o e
 | Onde | Variável | Uso |
 |---|---|---|
 | Serviço de Visão | `VISAO_API_KEY` | chave esperada no header `x-api-key` (vazia desativa a verificação, só para uso local) |
+| Serviço de Visão | `VISAO_DEMO` | `1` liga a página de demonstração em `/demo/` (desligada por padrão, não use em produção) |
 | Serviço de Visão | `PORT` | porta do servidor (padrão 8000 na imagem Docker) |
 | Serviço de Visão | `TESSERACT_CMD` | caminho do Tesseract, se não estiver no PATH |
 | API do ZelaAí | `VISAO_URL` | endereço base do serviço, sem a barra final |
@@ -133,6 +135,23 @@ Com Docker (Tesseract e português já incluídos):
 docker build -t zelai-visao .
 docker run -p 8000:8000 -e VISAO_API_KEY=troque-esta-chave zelai-visao
 ```
+
+### Tela de confirmação e correção
+
+O serviço inclui uma página de demonstração do fluxo que o cidadão percorre no ZelaAí. Ela fica desligada por padrão e é ativada com `VISAO_DEMO=1`:
+
+```bash
+VISAO_DEMO=1 uvicorn citizentech_vision.api:app --port 8000
+```
+
+Em PowerShell: `$env:VISAO_DEMO="1"; uvicorn citizentech_vision.api:app --port 8000`. Depois, abra `http://localhost:8000/`.
+
+1. O cidadão envia a foto da conta (ou escolhe digitar o endereço).
+2. O formulário aparece preenchido com a leitura. Os campos incertos ficam destacados com a mensagem "Confira este campo", sem depender só de cor, e a confiança é exibida em porcentagem.
+3. Ele corrige o que for preciso. Se a leitura falhar, o formulário abre vazio para digitação manual (o mesmo plano B da API).
+4. Ao confirmar, a página mostra o que seria salvo (`PUT /enderecos/meu` com bairro, CEP e cidade) e que a foto e os demais campos não são guardados.
+
+A página usa rótulos associados aos campos, alvos de toque grandes, foco visível, mensagens de erro anunciadas por leitores de tela e respeita o tema claro ou escuro do aparelho. A rota `/demo/extrair` existe só nesse modo e não exige a chave de API, por isso a demonstração não deve ser publicada em produção. A rota oficial `/extrair-endereco` continua protegida.
 
 ### Publicação na Azure
 

@@ -247,3 +247,59 @@ def test_ponta_a_ponta_com_foto_sintetica():
     valida_contrato_zelai(corpo)
     assert corpo["empresa"] == "Sabesp"
     assert corpo["endereco"]["cep"].replace("-", "") == entrada["endereco"]["cep"].replace("-", "")
+
+
+def cliente_demo(demo, api_key="segredo"):
+    app = create_app(api_key=api_key, extractor=lambda foto: resultado_fake(), demo=demo)
+    return TestClient(app)
+
+
+def test_demo_desligada_por_padrao():
+    c = cliente_demo(False)
+    assert c.get("/demo/").status_code == 404
+    assert enviar_demo(c).status_code in (404, 405)
+
+
+def enviar_demo(c):
+    return c.post("/demo/extrair", files={"imagem": ("a.png", png_bytes(), "image/png")})
+
+
+def test_demo_ligada_serve_a_pagina():
+    c = cliente_demo(True)
+    resposta = c.get("/demo/")
+    assert resposta.status_code == 200
+    assert "ZelaAí" in resposta.text
+    for identificador in ("form-envio", "form-endereco", "cep", "bairro", "cidade"):
+        assert f'id="{identificador}"' in resposta.text
+    assert c.get("/demo/demo.js").status_code == 200
+    assert c.get("/demo/demo.css").status_code == 200
+
+
+def test_demo_ligada_redireciona_a_raiz():
+    c = cliente_demo(True)
+    resposta = c.get("/", follow_redirects=False)
+    assert resposta.status_code in (302, 307)
+    assert resposta.headers["location"] == "/demo/"
+
+
+def test_demo_extrai_sem_chave_mas_a_rota_oficial_continua_protegida():
+    c = cliente_demo(True)
+    resposta = enviar_demo(c)
+    assert resposta.status_code == 200
+    valida_contrato_zelai(resposta.json())
+    assert enviar(c, png_bytes()).status_code == 401
+
+
+def test_demo_aplica_os_mesmos_limites():
+    c = cliente_demo(True)
+    resposta = c.post("/demo/extrair", files={"imagem": ("a.pdf", b"%PDF", "application/pdf")})
+    assert resposta.status_code == 415
+
+
+def test_variavel_de_ambiente_liga_a_demo(monkeypatch):
+    monkeypatch.setenv("VISAO_DEMO", "1")
+    c = TestClient(create_app(api_key="", extractor=lambda foto: resultado_fake()))
+    assert c.get("/demo/").status_code == 200
+    monkeypatch.setenv("VISAO_DEMO", "0")
+    c = TestClient(create_app(api_key="", extractor=lambda foto: resultado_fake()))
+    assert c.get("/demo/").status_code == 404
