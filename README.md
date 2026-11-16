@@ -158,9 +158,11 @@ A página usa rótulos associados aos campos, alvos de toque grandes, foco visí
 
 O App Service Node da API não tem Tesseract, então a Visão roda como um **segundo serviço em contêiner** (por exemplo, um Web App for Containers ou um Container App), no mesmo grupo de recursos. Passos:
 
-1. Publicar a imagem em um registro (por exemplo, Azure Container Registry) e criar o serviço apontando para ela, com `WEBSITES_PORT=8000` e health check em `/health`.
-2. Guardar `VISAO_API_KEY` no Key Vault, com referência nas configurações do serviço, como já é feito com os demais segredos.
+1. A imagem é publicada automaticamente em `ghcr.io/guguim/gs-citizentech:latest` pelo workflow `.github/workflows/publish-image.yml` a cada merge na `main`. O workflow constrói a imagem, sobe o contêiner, confere `/health` e a recusa sem chave (401) e só então publica. O pacote precisa estar com visibilidade pública.
+2. Criar o Web App em contêiner apontando para essa imagem, com `WEBSITES_PORT=8000`, health check em `/health` e `VISAO_API_KEY` (de preferência no Key Vault, como os demais segredos).
 3. Na API do ZelaAí, definir `VISAO_URL` com a URL do serviço e `VISAO_API_KEY` com a mesma chave.
+
+Os comandos completos estão em [docs/deploy_azure.md](docs/deploy_azure.md).
 
 ## Dataset sintético
 
