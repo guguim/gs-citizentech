@@ -64,7 +64,9 @@
     <b>FIAP · Global Solution 2026.2 · CitizenTech</b> · Applied Computer Vision (prof. Wilians Conde)<br>
     <b>API do ZelaAí:</b> <a href="https://zelai-api.azurewebsites.net">zelai-api.azurewebsites.net</a> ·
     <b>Documentação da API:</b> <a href="https://zelai-api.azurewebsites.net/docs">zelai-api.azurewebsites.net/docs</a><br>
-    <b>Repositório da API:</b> <a href="https://github.com/Rodriguessz/zelai-api">github.com/Rodriguessz/zelai-api</a>
+    <b>Repositório da Visão Computacional:</b> <a href="https://github.com/guguim/gs-citizentech">github.com/guguim/gs-citizentech</a> ·
+    <b>Repositório da API:</b> <a href="https://github.com/Rodriguessz/zelai-api">github.com/Rodriguessz/zelai-api</a><br>
+    <b>Integrantes:</b> RM553377 Enzo Rodrigues · RM552632 Gabriel Mediotti · RM553266 Hugo Santos · RM553384 Maria Júlia · RM553521 Rafael Cristofali
 
   </div>
 </header>
@@ -72,13 +74,14 @@
 <h2>1. Ficha Técnica do MVP</h2>
 <table class="ficha">
   <tr><th>Nome do produto</th><td>ZelaAí</td></tr>
+  <tr><th>Integrantes</th><td>RM553377 Enzo Rodrigues · RM552632 Gabriel Mediotti · RM553266 Hugo Santos · RM553384 Maria Júlia · RM553521 Rafael Cristofali</td></tr>
   <tr><th>Cidadão e território</th><td>Idosos e pessoas com deficiência em bairros de São Paulo, os primeiros a sofrer com calçadas quebradas, semáforos sem funcionar e pontos de ônibus sem acessibilidade.</td></tr>
   <tr><th>Problema, em uma frase</th><td>Falhas no espaço público que afetam quem mais depende dele não chegam à prefeitura de forma simples e não são acompanhadas até a solução.</td></tr>
   <tr><th>Proposta de valor</th><td><i>"Reporte em 1 minuto, acompanhe até resolver"</i>: o cidadão registra o problema, a IA prioriza, o gestor aprova e um robô protocola no Portal 156. A Visão Computacional agiliza o cadastro: a foto de uma conta preenche o endereço, que o cidadão só confirma.</td></tr>
   <tr><th>Arquitetura: componentes</th><td>API Node.js 22 (Azure App Service) · PostgreSQL 16 · Key Vault · Application Insights · <b>Visão Computacional (serviço Python com OpenCV e Tesseract, objeto deste relatório)</b> · GenAI (triagem) · Apache Airflow (dados) · robô UiPath (RPA) · Power BI · front-end web acessível.</td></tr>
   <tr><th>Fontes de dados</th><td>Documentos sintéticos gerados pela equipe, com gabarito e sem dados pessoais reais · ocorrências registradas na plataforma · dados abertos SP156 e GeoSampa · IBGE.</td></tr>
   <tr><th>Modelos de IA utilizados</th><td>OCR com Tesseract (idioma português) sobre imagens tratadas com OpenCV · LLM para triagem de ocorrências (GenAI), com plano B por regras e decisão final humana.</td></tr>
-  <tr><th>URL do MVP e repositório</th><td>API: <a href="https://zelai-api.azurewebsites.net">zelai-api.azurewebsites.net</a> · Swagger: <a href="https://zelai-api.azurewebsites.net/docs">/docs</a> · Repositório da API: <a href="https://github.com/Rodriguessz/zelai-api">Rodriguessz/zelai-api</a></td></tr>
+  <tr><th>URL do MVP e repositório</th><td>API: <a href="https://zelai-api.azurewebsites.net">zelai-api.azurewebsites.net</a> · Swagger: <a href="https://zelai-api.azurewebsites.net/docs">/docs</a> · Repositório da Visão Computacional: <a href="https://github.com/guguim/gs-citizentech">guguim/gs-citizentech</a> · Repositório da API: <a href="https://github.com/Rodriguessz/zelai-api">Rodriguessz/zelai-api</a></td></tr>
   <tr><th>Indicadores de impacto</th><td>Da Visão: acerto do endereço completo, taxa de revisão e tempo de leitura (seção 8). Da plataforma: tempo médio entre o registro e o protocolo no 156, % de ocorrências resolvidas e prioridade por bairro.</td></tr>
   <tr><th>ODS conectados</th><td>ODS 9 (infraestrutura resiliente) · ODS 10 (redução das desigualdades) · ODS 11 (cidades e comunidades sustentáveis). Detalhes na seção 10.</td></tr>
 </table>
@@ -333,6 +336,7 @@
 
 <h2>11. Links e referências</h2>
 <ul>
+  <li>Repositório da Visão Computacional (código, dataset sintético, testes e README): <a href="https://github.com/guguim/gs-citizentech">github.com/guguim/gs-citizentech</a></li>
   <li>API do ZelaAí: <a href="https://zelai-api.azurewebsites.net">zelai-api.azurewebsites.net</a> · Documentação: <a href="https://zelai-api.azurewebsites.net/docs">zelai-api.azurewebsites.net/docs</a> · Código: <a href="https://github.com/Rodriguessz/zelai-api">github.com/Rodriguessz/zelai-api</a></li>
   <li>Objetivos de Desenvolvimento Sustentável (ONU): <a href="https://sdgs.un.org/goals/goal9">ODS 9</a> · <a href="https://sdgs.un.org/goals/goal10">ODS 10</a> · <a href="https://sdgs.un.org/goals/goal11">ODS 11</a></li>
   <li>OpenCV: <a href="https://opencv.org">opencv.org</a> · Tesseract OCR: <a href="https://github.com/tesseract-ocr/tesseract">github.com/tesseract-ocr/tesseract</a></li>

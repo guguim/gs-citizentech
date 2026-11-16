@@ -1,9 +1,12 @@
 import hmac
 import os
+from pathlib import Path
 
 import cv2
 import numpy as np
 from fastapi import Depends, FastAPI, File, Header, HTTPException, UploadFile
+from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
 
 from citizentech_vision.extraction import extract_address
 
@@ -12,6 +15,8 @@ TIPOS_ACEITOS = ("image/jpeg", "image/png", "image/webp")
 CAMPOS_CONTRATO = ("logradouro", "numero", "bairro", "cep", "cidade")
 CAMPOS_EXTRAS = ("complemento", "uf")
 NOMES_EMPRESAS = {"enel": "Enel", "sabesp": "Sabesp", "claro": "Claro"}
+PASTA_DEMO = Path(__file__).resolve().parent / "demo"
+VALORES_VERDADEIROS = ("1", "true", "sim", "yes")
 
 
 def nome_da_empresa(empresa):
@@ -49,7 +54,28 @@ def decode_image(conteudo):
     return cv2.imdecode(dados, cv2.IMREAD_COLOR)
 
 
-def create_app(api_key=None, extractor=extract_address):
+def demo_ativado(demo):
+    if demo is not None:
+        return bool(demo)
+    return os.environ.get("VISAO_DEMO", "").strip().lower() in VALORES_VERDADEIROS
+
+
+def process_upload(imagem, extractor):
+    if imagem.content_type not in TIPOS_ACEITOS:
+        raise HTTPException(status_code=415, detail="Envie uma imagem JPG, PNG ou WEBP.")
+    conteudo = imagem.file.read(TAMANHO_MAXIMO_BYTES + 1)
+    if len(conteudo) > TAMANHO_MAXIMO_BYTES:
+        raise HTTPException(status_code=413, detail="A imagem excede o limite de 5 MB.")
+    foto = decode_image(conteudo)
+    if foto is None:
+        raise HTTPException(status_code=422, detail="Não foi possível abrir a imagem enviada.")
+    resultado = extractor(foto)
+    if not resultado.encontrado:
+        raise HTTPException(status_code=422, detail="Nenhum endereço de cliente foi encontrado na imagem.")
+    return build_response(resultado)
+
+
+def create_app(api_key=None, extractor=extract_address, demo=None):
     chave_esperada = api_key if api_key is not None else os.environ.get("VISAO_API_KEY", "")
     app = FastAPI(
         title="ZelaAí · Visão Computacional",
@@ -67,18 +93,18 @@ def create_app(api_key=None, extractor=extract_address):
 
     @app.post("/extrair-endereco", dependencies=[Depends(exigir_chave)])
     def extrair_endereco(imagem: UploadFile = File(...)):
-        if imagem.content_type not in TIPOS_ACEITOS:
-            raise HTTPException(status_code=415, detail="Envie uma imagem JPG, PNG ou WEBP.")
-        conteudo = imagem.file.read(TAMANHO_MAXIMO_BYTES + 1)
-        if len(conteudo) > TAMANHO_MAXIMO_BYTES:
-            raise HTTPException(status_code=413, detail="A imagem excede o limite de 5 MB.")
-        foto = decode_image(conteudo)
-        if foto is None:
-            raise HTTPException(status_code=422, detail="Não foi possível abrir a imagem enviada.")
-        resultado = extractor(foto)
-        if not resultado.encontrado:
-            raise HTTPException(status_code=422, detail="Nenhum endereço de cliente foi encontrado na imagem.")
-        return build_response(resultado)
+        return process_upload(imagem, extractor)
+
+    if demo_ativado(demo):
+        @app.post("/demo/extrair", include_in_schema=False)
+        def extrair_demo(imagem: UploadFile = File(...)):
+            return process_upload(imagem, extractor)
+
+        @app.get("/", include_in_schema=False)
+        def raiz():
+            return RedirectResponse("/demo/")
+
+        app.mount("/demo", StaticFiles(directory=PASTA_DEMO, html=True), name="demo")
 
     return app
 
