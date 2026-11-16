@@ -53,6 +53,7 @@ scripts/                  utilitários (verificação do ambiente, geração do 
 Dockerfile                imagem do serviço, com Tesseract e idioma português
 tests/                    testes automatizados
 data/                     dataset sintético e gabarito
+docs/figures/             figuras do relatório técnico (geradas por scripts/make_report_figures.py)
 ```
 
 ## Integração com o ZelaAí
@@ -341,6 +342,28 @@ Um erro que o plano B por âncora cometia antes de uma correção: em `claro_04_
 - A lista de cidades conhecidas é parcial (capitais e cidades grandes). Em produção deve ser trocada pela base de municípios do IBGE. A validação CEP x UF usa as faixas gerais dos Correios, sem consultar uma base de CEPs, então não confere se a rua existe naquele CEP.
 - O OCR confiante e errado é possível: nomes de rua lidos errado com palavras que parecem plausíveis (`Rapetininga`) só são pegos quando as variantes divergem.
 - Perda de acentos (`José` lido como `Jose`) conta como erro na avaliação, mas é de baixo impacto para o usuário que confirma o endereço.
+
+## Figuras do relatório
+
+As imagens do relatório técnico ficam em `docs/figures/` e são geradas a partir do dataset sintético:
+
+| Arquivo | Conteúdo |
+|---|---|
+| `01_deteccao_e_perspectiva.png` | foto original, documento detectado com os 4 cantos e página corrigida, para as três condições |
+| `02_preprocessamento_antes_e_depois.png` | recorte do endereço, tons de cinza, mediana e limiar adaptativo, com o histograma e o contraste |
+| `03_extracao_do_endereco_do_cliente.png` | zona lida, campos extraídos conferidos com o gabarito e os endereços da fatura que foram ignorados |
+| `04_metricas_de_extracao.png` | acerto do endereço completo por condição e empresa, acerto por campo e tempo por foto |
+| `05_tela_de_confirmacao.png` | as três telas da página de confirmação e correção |
+| `resumo_metricas.json` | números consolidados da avaliação |
+
+Para regenerar (leva cerca de um minuto, por causa da avaliação completa):
+
+```bash
+pip install -r requirements-report.txt
+python scripts/make_report_figures.py
+```
+
+Use `--sem-metricas` para gerar só as figuras do pipeline, sem rodar a avaliação.
 
 ## Como instalar
 
