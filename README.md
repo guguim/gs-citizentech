@@ -1,23 +1,23 @@
-# gs-citizentech
+# ZelaAí · Visão Computacional
 
-MVP desenvolvido para o desafio **FIAP Global Solution 2026.2: CitizenTech**.
+Componente de **Visão Computacional** (Applied Computer Vision) do **ZelaAí**, plataforma de zeladoria urbana acessível desenvolvida para a **FIAP Global Solution 2026.2: CitizenTech**.
 
-Este repositório reúne o componente de **Visão Computacional** (Applied Computer Vision): a extração automática de endereços a partir de fotografias de comprovantes de três empresas (Enel, Sabesp e Claro), para preencher o cadastro do MVP.
+O serviço extrai automaticamente o endereço do cliente a partir da fotografia de uma conta de três empresas (Enel, Sabesp e Claro), para que o cidadão preencha o cadastro do ZelaAí em poucos segundos e confirme os dados lidos. Ele é consumido pela [API do ZelaAí](https://github.com/Rodriguessz/zelai-api) por HTTP, conforme descrito em [Integração com o ZelaAí](#integração-com-o-zelaaí).
 
 ## Ficha Técnica do MVP
 
 | Item | Descrição |
 |---|---|
-| Nome do produto | A definir pela equipe |
-| Cidadão e território | A definir pela equipe |
-| Problema, em uma frase | A definir pela equipe |
-| Proposta de valor | A definir pela equipe |
-| Arquitetura: componentes | A definir pela equipe |
-| Fontes de dados | Documentos sintéticos gerados pela equipe, com gabarito (sem dados pessoais reais) |
-| Modelos de IA utilizados | OCR com Tesseract (idioma português) |
-| URL do MVP e repositório | A definir pela equipe |
-| Indicadores de impacto | A definir pela equipe |
-| ODS conectados | A definir pela equipe |
+| Nome do produto | ZelaAí |
+| Cidadão e território | Idosos e pessoas com deficiência em bairros de São Paulo, os primeiros a sofrer com calçadas quebradas, semáforos sem funcionar e pontos de ônibus sem acessibilidade |
+| Problema, em uma frase | Falhas no espaço público que afetam quem mais depende dele não chegam à prefeitura de forma simples e não são acompanhadas até a solução |
+| Proposta de valor | *"Reporte em 1 minuto, acompanhe até resolver"*: o cidadão registra o problema, a IA prioriza, o gestor aprova e um robô protocola no Portal 156. A Visão Computacional agiliza o cadastro: a foto de uma conta preenche bairro, CEP e cidade, que o cidadão só confirma |
+| Arquitetura: componentes | API Node.js 22 (Azure App Service) · PostgreSQL 16 · Key Vault · Application Insights · **Visão Computacional (serviço Python com OpenCV e Tesseract, este repositório)** · GenAI (triagem) · Apache Airflow (dados) · robô UiPath (RPA) · Power BI · front-end web acessível |
+| Fontes de dados | Documentos sintéticos gerados pela equipe, com gabarito (sem dados pessoais reais) · ocorrências registradas na plataforma · dados abertos SP156 e GeoSampa · IBGE |
+| Modelos de IA utilizados | OCR com Tesseract (idioma português) sobre imagens tratadas com OpenCV · LLM para triagem (GenAI), com plano B por regras e decisão final humana |
+| URL do MVP e repositório | API: https://zelai-api.azurewebsites.net · Swagger: https://zelai-api.azurewebsites.net/docs · Repositório da API: https://github.com/Rodriguessz/zelai-api |
+| Indicadores de impacto | Da Visão: acerto do endereço completo, taxa de revisão e tempo de leitura (ver [Avaliação](#avaliação)). Da plataforma: tempo médio entre registro e protocolo no 156, % de ocorrências resolvidas e prioridade por bairro |
+| ODS conectados | ODS 9 (infraestrutura resiliente) · ODS 10 (redução das desigualdades: acessibilidade para idosos e PcD) · ODS 11 (cidades e comunidades sustentáveis) |
 
 ## Componente de Visão Computacional
 
@@ -28,7 +28,7 @@ Pipeline previsto:
 3. Pré-processar a imagem
 4. Extrair o endereço por OCR, distinguindo-o dos demais endereços da fatura
 5. Validar os dados e apresentá-los para confirmação ou correção
-6. Entregar o endereço ao MVP
+6. Entregar o endereço ao ZelaAí pela API HTTP, que mostra a sugestão ao cidadão para confirmação ou correção
 
 ## Estrutura do projeto
 
@@ -43,14 +43,104 @@ src/citizentech_vision/   código do componente
   validation.py           validação dos campos e consistência CEP x UF
   voting.py               votação entre variantes de pré-processamento
   extraction.py           pipeline de extração do endereço do cliente
+  api.py                  serviço HTTP (FastAPI) que o ZelaAí consome
   textmatch.py            comparação aproximada de textos
   cities.py               lista de cidades conhecidas para corrigir o OCR
   metrics.py              métricas de avaliação (detecção e OCR)
   synthetic/              gerador do dataset sintético
-scripts/                  utilitários (verificação do ambiente, geração do dataset)
+scripts/                  utilitários (verificação do ambiente, geração do dataset, avaliação)
+Dockerfile                imagem do serviço, com Tesseract e idioma português
 tests/                    testes automatizados
 data/                     dataset sintético e gabarito
 ```
+
+## Integração com o ZelaAí
+
+A API do ZelaAí (Node.js) chama este serviço por HTTP quando o cidadão envia a foto de uma conta em `POST /enderecos/extracao`. O serviço devolve uma **sugestão**: o cidadão confirma ou corrige em `PUT /enderecos/meu`, e a API grava apenas bairro, CEP e cidade (minimização de dados da LGPD).
+
+```
+Cidadão → ZelaAí API (POST /enderecos/extracao, campo "comprovante")
+              └→ Visão (POST /extrair-endereco, campo "imagem")
+                     rectify → empresa → zona → OCR → campos → validação → confiança
+              ←─ { empresa, confianca, endereco }
+Cidadão confirma → PUT /enderecos/meu
+```
+
+### Contrato
+
+`POST /extrair-endereco`, `multipart/form-data`, campo `imagem` (JPG, PNG ou WEBP, até 5 MB). Se a variável `VISAO_API_KEY` estiver definida no serviço, a requisição precisa do header `x-api-key` com o mesmo valor.
+
+```json
+{
+  "empresa": "Sabesp",
+  "confianca": 0.93,
+  "endereco": {
+    "logradouro": "Alameda Voluntários da Pátria",
+    "numero": "742",
+    "bairro": "Parque São Jorge",
+    "cep": "02633-675",
+    "cidade": "São Paulo",
+    "complemento": "Casa 149",
+    "uf": "SP"
+  },
+  "revisar": false,
+  "campos_revisar": [],
+  "problemas": [],
+  "metodo": "zona"
+}
+```
+
+`empresa`, `confianca` e os cinco primeiros campos de `endereco` são os que a API do ZelaAí valida. Os demais são extras que a API atual descarta ao validar a resposta; ficam disponíveis caso ela passe a repassá-los ao front-end para destacar o que o cidadão precisa conferir. Campos não lidos vêm como `null`, e `confianca` fica sempre entre 0 e 1. A API do ZelaAí marca `revisar: true` quando `confianca < 0,8`, o mesmo limiar que usamos internamente.
+
+| Código | Quando | O que o ZelaAí faz |
+|---|---|---|
+| 200 | endereço extraído (mesmo com baixa confiança) | mostra a sugestão para o cidadão confirmar |
+| 401 | `x-api-key` ausente ou incorreta | plano B |
+| 413 | imagem acima de 5 MB | plano B |
+| 415 | arquivo que não é JPG, PNG ou WEBP | plano B |
+| 422 | imagem ilegível ou nenhum endereço de cliente encontrado | plano B |
+
+No plano B a API responde `fonte: "manual"` e orienta o cidadão a preencher o endereço à mão, então qualquer falha da Visão nunca trava o cadastro. A foto é processada em memória e **nunca é gravada em disco**.
+
+### Variáveis de ambiente
+
+| Onde | Variável | Uso |
+|---|---|---|
+| Serviço de Visão | `VISAO_API_KEY` | chave esperada no header `x-api-key` (vazia desativa a verificação, só para uso local) |
+| Serviço de Visão | `PORT` | porta do servidor (padrão 8000 na imagem Docker) |
+| Serviço de Visão | `TESSERACT_CMD` | caminho do Tesseract, se não estiver no PATH |
+| API do ZelaAí | `VISAO_URL` | endereço base do serviço, sem a barra final |
+| API do ZelaAí | `VISAO_API_KEY` | mesma chave do serviço, guardada no Key Vault |
+| API do ZelaAí | `VISAO_TIMEOUT_MS` | tempo limite (padrão 15000). A leitura leva em média 1,4 s e chega a cerca de 2,3 s nas fotos difíceis |
+
+### Como rodar o serviço
+
+Localmente:
+
+```bash
+uvicorn citizentech_vision.api:app --port 8000
+```
+
+A documentação interativa fica em `http://localhost:8000/docs` e a checagem de saúde em `GET /health`. Para testar com uma foto do dataset:
+
+```bash
+curl -F "imagem=@data/synthetic/photos/sabesp_01_frontal.jpg" http://localhost:8000/extrair-endereco
+```
+
+Com Docker (Tesseract e português já incluídos):
+
+```bash
+docker build -t zelai-visao .
+docker run -p 8000:8000 -e VISAO_API_KEY=troque-esta-chave zelai-visao
+```
+
+### Publicação na Azure
+
+O App Service Node da API não tem Tesseract, então a Visão roda como um **segundo serviço em contêiner** (por exemplo, um Web App for Containers ou um Container App), no mesmo grupo de recursos. Passos:
+
+1. Publicar a imagem em um registro (por exemplo, Azure Container Registry) e criar o serviço apontando para ela, com `WEBSITES_PORT=8000` e health check em `/health`.
+2. Guardar `VISAO_API_KEY` no Key Vault, com referência nas configurações do serviço, como já é feito com os demais segredos.
+3. Na API do ZelaAí, definir `VISAO_URL` com a URL do serviço e `VISAO_API_KEY` com a mesma chave.
 
 ## Dataset sintético
 
@@ -270,3 +360,5 @@ Requisitos: Python 3.10 ou superior e Tesseract OCR com o idioma português.
 ```bash
 pytest
 ```
+
+Os testes do serviço HTTP (`tests/test_api.py`) conferem a resposta contra o mesmo formato que a API do ZelaAí valida, as regras de chave, tipo e tamanho do arquivo e que nada é gravado em disco.
