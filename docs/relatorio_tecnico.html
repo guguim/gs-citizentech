@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>ZelaAí · Visão Computacional · Relatório técnico</title>
+<style>
+  @page { size: A4; margin: 17mm 16mm 20mm; }
+  :root {
+    --tinta: #1a2332;
+    --suave: #4a5568;
+    --linha: #cfd6e0;
+    --fundo: #f3f6fa;
+    --azul: #0b5cab;
+    --azul-claro: #e6f0fb;
+    --verde: #1b6e3b;
+    --ambar: #8a4b00;
+    --ambar-fundo: #fff4d6;
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 10pt; }
+  body { margin: 0; color: var(--tinta); font-family: "Inter", "Segoe UI", Arial, sans-serif; line-height: 1.5; }
+  h1, h2, h3 { line-height: 1.25; margin: 0; }
+  h1 { font-size: 24pt; color: var(--azul); letter-spacing: -0.01em; }
+  h2 { font-size: 14pt; margin: 22pt 0 7pt; padding-bottom: 4pt; border-bottom: 2px solid var(--azul); break-after: avoid; }
+  h3 { font-size: 11pt; margin: 14pt 0 4pt; break-after: avoid; }
+  p { margin: 0 0 7pt; }
+  ul, ol { margin: 0 0 8pt; padding-left: 16pt; }
+  li { margin-bottom: 2.5pt; }
+  a { color: var(--azul); text-decoration: none; word-break: break-word; }
+  code { font-family: "DejaVu Sans Mono", Consolas, monospace; font-size: 8.4pt; background: var(--fundo); padding: 0.5pt 3pt; border-radius: 3px; }
+  .sub { color: var(--suave); font-size: 11pt; margin: 4pt 0 0; }
+  .meta { margin-top: 10pt; padding: 8pt 10pt; background: var(--fundo); border-left: 4px solid var(--azul); font-size: 9pt; color: var(--suave); }
+  .meta b { color: var(--tinta); }
+  table { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 8.6pt; break-inside: avoid; }
+  th, td { border: 1px solid var(--linha); padding: 3.5pt 6pt; text-align: left; vertical-align: top; }
+  th { background: var(--azul-claro); font-weight: 700; }
+  td.n, th.n { text-align: right; white-space: nowrap; }
+  tr.destaque td { background: #e7f5ec; font-weight: 700; }
+  table.ficha th { width: 27%; background: var(--fundo); }
+  figure { margin: 8pt 0 10pt; break-inside: avoid; text-align: center; }
+  figure img { max-width: 100%; }
+  figcaption { font-size: 8.4pt; color: var(--suave); margin-top: 4pt; text-align: left; }
+  .quebra { break-before: page; }
+  .nota { padding: 7pt 10pt; border-left: 4px solid var(--ambar); background: var(--ambar-fundo); color: #4a2a00; font-size: 9pt; margin: 8pt 0 10pt; break-inside: avoid; }
+  .destaque-azul { padding: 7pt 10pt; border-left: 4px solid var(--azul); background: var(--azul-claro); font-size: 9pt; margin: 8pt 0 10pt; break-inside: avoid; }
+  .duas { display: grid; grid-template-columns: 56mm 1fr; gap: 12pt; align-items: start; }
+  .duas figure { margin: 0; }
+  .fluxo { display: flex; flex-wrap: wrap; gap: 5pt; margin: 8pt 0 10pt; }
+  .passo { flex: 1 1 28%; border: 1px solid var(--linha); border-radius: 6px; padding: 6pt 8pt; font-size: 8.6pt; background: #fff; break-inside: avoid; }
+  .passo b { display: block; color: var(--azul); font-size: 9pt; margin-bottom: 1pt; }
+  .passo i { color: var(--suave); font-style: normal; }
+  .ods { border: 1px solid var(--linha); border-radius: 6px; padding: 8pt 10pt; margin: 7pt 0; break-inside: avoid; }
+  .ods h3 { margin: 0 0 4pt; color: var(--azul); }
+  .ods blockquote { margin: 3pt 0 5pt; padding-left: 8pt; border-left: 3px solid var(--linha); color: var(--suave); font-size: 8.8pt; }
+  .pequeno { font-size: 8.6pt; color: var(--suave); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>ZelaAí · Visão Computacional</h1>
+  <p class="sub">Extração automática de endereços a partir de fotografias de contas (Enel, Sabesp e Claro)</p>
+  <div class="meta">
+    <b>FIAP · Global Solution 2026.2 · CitizenTech</b> · Applied Computer Vision (prof. Wilians Conde)<br>
+    <b>API do ZelaAí:</b> <a href="https://zelai-api.azurewebsites.net">zelai-api.azurewebsites.net</a> ·
+    <b>Documentação da API:</b> <a href="https://zelai-api.azurewebsites.net/docs">zelai-api.azurewebsites.net/docs</a><br>
+    <b>Repositório da API:</b> <a href="https://github.com/Rodriguessz/zelai-api">github.com/Rodriguessz/zelai-api</a>
+
+  </div>
+</header>
+
+<h2>1. Ficha Técnica do MVP</h2>
+<table class="ficha">
+  <tr><th>Nome do produto</th><td>ZelaAí</td></tr>
+  <tr><th>Cidadão e território</th><td>Idosos e pessoas com deficiência em bairros de São Paulo, os primeiros a sofrer com calçadas quebradas, semáforos sem funcionar e pontos de ônibus sem acessibilidade.</td></tr>
+  <tr><th>Problema, em uma frase</th><td>Falhas no espaço público que afetam quem mais depende dele não chegam à prefeitura de forma simples e não são acompanhadas até a solução.</td></tr>
+  <tr><th>Proposta de valor</th><td><i>"Reporte em 1 minuto, acompanhe até resolver"</i>: o cidadão registra o problema, a IA prioriza, o gestor aprova e um robô protocola no Portal 156. A Visão Computacional agiliza o cadastro: a foto de uma conta preenche o endereço, que o cidadão só confirma.</td></tr>
+  <tr><th>Arquitetura: componentes</th><td>API Node.js 22 (Azure App Service) · PostgreSQL 16 · Key Vault · Application Insights · <b>Visão Computacional (serviço Python com OpenCV e Tesseract, objeto deste relatório)</b> · GenAI (triagem) · Apache Airflow (dados) · robô UiPath (RPA) · Power BI · front-end web acessível.</td></tr>
+  <tr><th>Fontes de dados</th><td>Documentos sintéticos gerados pela equipe, com gabarito e sem dados pessoais reais · ocorrências registradas na plataforma · dados abertos SP156 e GeoSampa · IBGE.</td></tr>
+  <tr><th>Modelos de IA utilizados</th><td>OCR com Tesseract (idioma português) sobre imagens tratadas com OpenCV · LLM para triagem de ocorrências (GenAI), com plano B por regras e decisão final humana.</td></tr>
+  <tr><th>URL do MVP e repositório</th><td>API: <a href="https://zelai-api.azurewebsites.net">zelai-api.azurewebsites.net</a> · Swagger: <a href="https://zelai-api.azurewebsites.net/docs">/docs</a> · Repositório da API: <a href="https://github.com/Rodriguessz/zelai-api">Rodriguessz/zelai-api</a></td></tr>
+  <tr><th>Indicadores de impacto</th><td>Da Visão: acerto do endereço completo, taxa de revisão e tempo de leitura (seção 8). Da plataforma: tempo médio entre o registro e o protocolo no 156, % de ocorrências resolvidas e prioridade por bairro.</td></tr>
+  <tr><th>ODS conectados</th><td>ODS 9 (infraestrutura resiliente) · ODS 10 (redução das desigualdades) · ODS 11 (cidades e comunidades sustentáveis). Detalhes na seção 10.</td></tr>
+</table>
+
+<h2>2. Visão geral do componente</h2>
+<p>No ZelaAí, o cidadão precisa informar o bairro e o CEP para que suas ocorrências sejam associadas ao território e priorizadas. Digitar esses dados é uma barreira justamente para quem o produto quer atender (idosos e pessoas com deficiência). O componente de Visão Computacional lê a foto de uma conta de luz, água ou telefone, localiza o <b>endereço do cliente</b> (e não o da empresa, da agência ou da loja) e devolve os dados separados em campos. O cidadão confere, corrige se for preciso e confirma.</p>
+
+<p style="break-after: avoid;">O pipeline segue a ordem pedida no enunciado:</p>
+<div class="fluxo">
+  <div class="passo"><b>1. Identificar o documento</b>gradiente de cor, morfologia, contornos e quadrilátero com 4 cantos<br><i>seção 4.1</i></div>
+  <div class="passo"><b>2. Corrigir a perspectiva</b><code>getPerspectiveTransform</code> e <code>warpPerspective</code> para uma página A4<br><i>seção 4.1</i></div>
+  <div class="passo"><b>3. Pré-processar</b>cinza, mediana e limiar adaptativo, escolhidos por experimentos<br><i>seção 4.2</i></div>
+  <div class="passo"><b>4. Extrair o endereço</b>empresa, zona do cliente, OCR e separação em campos<br><i>seção 5</i></div>
+  <div class="passo"><b>5. Validar e confirmar</b>regras, confiança e tela de confirmação ou correção<br><i>seção 6</i></div>
+  <div class="passo"><b>6. Usar no MVP</b>API HTTP consumida pelo ZelaAí, com plano B manual<br><i>seção 7</i></div>
+</div>
+
+<h2>3. Dataset sintético e gabarito</h2>
+<p>Para testar sem dados pessoais reais, o repositório gera por código um dataset sintético com semente fixa (o resultado é sempre o mesmo):</p>
+<ul>
+  <li><b>12 comprovantes fictícios</b>: 4 por empresa (Enel, Sabesp e Claro), com layout inspirado em faturas reais, mas sem logotipos reais. Nomes, endereços e números são inventados, e cada página traz a marca "DOCUMENTO SINTÉTICO PARA TESTES".</li>
+  <li><b>Dois endereços "distratores" por documento</b> (agência ou loja de atendimento e sede da empresa), para testar se o sistema escolhe o endereço do cliente.</li>
+  <li><b>36 fotos simuladas</b>, 3 por documento, em três condições: <i>frontal</i>, <i>inclinada</i> (perspectiva e rotação) e <i>difícil</i> (perspectiva forte, sombra, pouca luz, desfoque e ruído).</li>
+  <li><b>Gabarito em JSON</b> para cada foto: empresa, endereço separado em campos, linhas impressas, região do endereço, endereços distratores, os 4 cantos do documento e os parâmetros de perturbação usados.</li>
+</ul>
+
+<h2>4. Processamento da imagem</h2>
+<h3>4.1 Detecção do documento e correção de perspectiva</h3>
+<p>A função <code>rectify_document</code> encontra a folha na foto e a devolve em visão frontal, em tamanho fixo de página A4 (1240 × 1754 px):</p>
+<ol>
+  <li>Calcula o <b>gradiente de cor</b> (filtro de Sobel nos três canais) e binariza as bordas fortes.</li>
+  <li>Fecha pequenas falhas com <b>morfologia</b> e extrai o contorno externo com <code>findContours</code>.</li>
+  <li>Aproxima o contorno por um quadrilátero (<code>approxPolyDP</code>) e <b>ordena os 4 cantos</b>: superior esquerdo, superior direito, inferior direito e inferior esquerdo.</li>
+  <li><b>Refina cada lado</b>: procura a borda real ao longo da normal, ajusta uma reta por lado e recalcula os cantos pela interseção das retas.</li>
+  <li>Aplica <code>getPerspectiveTransform</code> e <code>warpPerspective</code>.</li>
+</ol>
+<p>O limiar de Otsu entra só como reserva, quando o gradiente não encontra nenhum quadrilátero válido. Se nada for encontrado, a imagem original é devolvida com <code>encontrado=False</code>, e o produto pede outra foto ou a digitação manual. A confiança da detecção mede a força das bordas do quadrilátero e serve de filtro (não é uma probabilidade calibrada).</p>
+
+<table>
+  <tr><th>Condição</th><th class="n">Fotos</th><th class="n">Documento encontrado</th><th class="n">IoU médio</th><th class="n">Erro médio nos cantos</th></tr>
+  <tr><td>frontal</td><td class="n">12</td><td class="n">12</td><td class="n">0,998</td><td class="n">1,3 px</td></tr>
+  <tr><td>inclinada</td><td class="n">12</td><td class="n">12</td><td class="n">0,998</td><td class="n">1,4 px</td></tr>
+  <tr><td>difícil</td><td class="n">12</td><td class="n">12</td><td class="n">0,997</td><td class="n">2,6 px</td></tr>
+</table>
+<p class="pequeno">IoU compara o quadrilátero detectado com o do gabarito; o erro nos cantos é a distância média entre os cantos detectados e os reais. Tempo médio de 0,2 s por foto.</p>
+
+<figure>
+  <img src="figures/01_deteccao_e_perspectiva.png" style="max-height: 184mm;" alt="Detecção do documento e correção de perspectiva">
+  <figcaption><b>Figura 1.</b> Detecção e correção de perspectiva em uma foto de cada condição. Da esquerda para a direita: foto original, quadrilátero detectado com os cantos numerados e página corrigida.</figcaption>
+</figure>
+
+<h3>4.2 Pré-processamento</h3>
+<p>Depois da correção, o recorte do endereço passa por <code>prepare_for_ocr</code> e segue para o Tesseract (<code>lang="por"</code>, <code>--psm 6</code>). Em vez de aplicar técnicas por intuição, cada variante foi comparada <b>uma mudança por vez</b> contra o texto impresso conhecido, nas 36 fotos já retificadas.</p>
+<ul>
+  <li><b>CER</b>: taxa de erro de caracteres (distância de edição dividida pelo tamanho do texto esperado). Menor é melhor.</li>
+  <li><b>CEP ok</b>: porcentagem de recortes em que o CEP esperado foi lido corretamente.</li>
+</ul>
+
+<table>
+  <tr><th>Variante</th><th class="n">CER frontal</th><th class="n">CER inclinada</th><th class="n">CER difícil</th><th class="n">CER geral</th><th class="n">CEP ok</th></tr>
+  <tr><td>referência: documento limpo, sem pré-processamento</td><td class="n">0,001</td><td class="n">0,001</td><td class="n">0,001</td><td class="n">0,001</td><td class="n">100%</td></tr>
+  <tr><td>original (sem pré-processamento)</td><td class="n">0,002</td><td class="n">0,001</td><td class="n">0,385</td><td class="n">0,129</td><td class="n">89%</td></tr>
+  <tr><td>cinza</td><td class="n">0,002</td><td class="n">0,001</td><td class="n">0,373</td><td class="n">0,125</td><td class="n">89%</td></tr>
+  <tr><td>ampliar 2×</td><td class="n">0,001</td><td class="n">0,001</td><td class="n">1,760</td><td class="n">0,587</td><td class="n">89%</td></tr>
+  <tr><td>mediana 3×3</td><td class="n">0,002</td><td class="n">0,002</td><td class="n">0,207</td><td class="n">0,070</td><td class="n">89%</td></tr>
+  <tr><td>mediana 5×5</td><td class="n">0,004</td><td class="n">0,004</td><td class="n">0,254</td><td class="n">0,088</td><td class="n">89%</td></tr>
+  <tr><td>equalizar histograma</td><td class="n">4,260</td><td class="n">1,852</td><td class="n">2,298</td><td class="n">2,803</td><td class="n">8%</td></tr>
+  <tr><td>esticar contraste</td><td class="n">0,002</td><td class="n">0,001</td><td class="n">0,391</td><td class="n">0,131</td><td class="n">89%</td></tr>
+  <tr><td>Otsu</td><td class="n">0,002</td><td class="n">0,003</td><td class="n">0,348</td><td class="n">0,118</td><td class="n">89%</td></tr>
+  <tr><td>mediana + Otsu</td><td class="n">0,006</td><td class="n">0,005</td><td class="n">0,267</td><td class="n">0,093</td><td class="n">86%</td></tr>
+  <tr><td>equalizar + mediana + Otsu</td><td class="n">2,773</td><td class="n">1,533</td><td class="n">1,704</td><td class="n">2,003</td><td class="n">3%</td></tr>
+  <tr><td>esticar + mediana + Otsu</td><td class="n">0,002</td><td class="n">0,010</td><td class="n">0,273</td><td class="n">0,095</td><td class="n">81%</td></tr>
+  <tr class="destaque"><td>mediana + adaptativo (escolhida)</td><td class="n">0,001</td><td class="n">0,006</td><td class="n">0,087</td><td class="n">0,031</td><td class="n">94%</td></tr>
+  <tr><td>ampliar + mediana + adaptativo</td><td class="n">0,002</td><td class="n">0,000</td><td class="n">0,135</td><td class="n">0,046</td><td class="n">89%</td></tr>
+  <tr><td>esticar + mediana + adaptativo</td><td class="n">0,002</td><td class="n">0,008</td><td class="n">0,928</td><td class="n">0,313</td><td class="n">83%</td></tr>
+  <tr><td>esticar (só com baixo contraste) + mediana + adaptativo</td><td class="n">0,001</td><td class="n">0,006</td><td class="n">0,928</td><td class="n">0,312</td><td class="n">83%</td></tr>
+  <tr><td>mediana + adaptativo + abertura</td><td class="n">0,013</td><td class="n">0,013</td><td class="n">0,220</td><td class="n">0,082</td><td class="n">81%</td></tr>
+  <tr><td>mediana + adaptativo + fechamento</td><td class="n">0,006</td><td class="n">0,014</td><td class="n">0,092</td><td class="n">0,037</td><td class="n">89%</td></tr>
+</table>
+
+<figure>
+  <img src="figures/02_preprocessamento_antes_e_depois.png" style="max-height: 205mm;" alt="Pré-processamento antes e depois">
+  <figcaption><b>Figura 2.</b> Etapas do pré-processamento no recorte do endereço, com o histograma da região em cinza e os percentis 2 e 98 usados para medir o contraste. Em cima, uma foto frontal; embaixo, uma foto difícil, em que o limiar adaptativo separa o texto apesar da sombra e do ruído.</figcaption>
+</figure>
+
+<h3>O que os experimentos mostraram</h3>
+<ul>
+  <li>Fotos frontais e inclinadas já são lidas quase sem erro sem tratamento. O ganho está nas <b>fotos difíceis</b>: o CER cai de 0,385 para 0,087.</li>
+  <li>O <b>filtro de mediana 3×3</b> reduz o ruído sem apagar os traços das letras; o 5×5 já piora.</li>
+  <li>O <b>limiar adaptativo</b> calcula o limite em cada vizinhança e lida bem com sombra. O Otsu global usa um único limite e erra mais nas fotos com sombra.</li>
+  <li>A <b>equalização de histograma</b> piora muito (CER 2,8). O papel branco domina o histograma do recorte, e a equalização transforma as pequenas variações desse fundo em ruído.</li>
+  <li>Esticar o contraste não ajuda sozinho e piora com o limiar adaptativo, porque amplifica o ruído.</li>
+  <li>Ampliar 2× não ajuda: o texto já tem cerca de 30 px de altura.</li>
+  <li>A <b>abertura morfológica</b> piora (apaga traços finos); o fechamento não traz ganho.</li>
+  <li>No <code>--psm</code>, os modos 6 e 11 têm erro parecido, e os de linha única (7 e 13) falham porque o recorte tem três linhas.</li>
+</ul>
+<div class="nota">O bloco (51) e a constante (15) do limiar adaptativo foram ajustados neste dataset. Em fotos reais podem precisar de novo ajuste.</div>
+
+<h2>5. Extração do endereço do cliente</h2>
+<p>A função <code>extract_address</code> recebe a foto e devolve o endereço separado em campos (logradouro, número, complemento, bairro, cidade, UF e CEP), com confiança e a lista de campos que o cidadão deve conferir.</p>
+<ol>
+  <li><b>Retificação</b> da página (seção 4.1).</li>
+  <li><b>Identificação da empresa</b>: o cabeçalho (14% superior) é lido com OCR e comparado com palavras-chave de cada empresa (<code>ENEL</code>, <code>SABESP</code>, <code>CLARO</code> e termos como <code>SANEAMENTO</code> e <code>FATURA DE SERVIÇOS</code>), tolerando pequenos erros como "Sa besp".</li>
+  <li><b>Zona do endereço do cliente</b>: cada empresa tem uma região configurada onde fica o endereço do cliente. O recorte é pré-processado e lido linha a linha. Agências, lojas e sede ficam fora dessa região, e é assim que o endereço do cliente é <b>distinguido dos demais</b>.</li>
+  <li><b>Plano B por âncora</b>: se a empresa não foi identificada ou a zona não passou na validação, a página inteira é lida (<code>image_to_data</code>) e o endereço é procurado logo abaixo de rótulos como <code>ENDEREÇO DO IMÓVEL</code> ou <code>ENDEREÇO DE COBRANÇA</code>. Rótulos como <code>AGÊNCIA</code>, <code>LOJAS</code> e <code>SEDE</code> encerram o bloco. Sem rótulo, só é aceito um bloco com CEP na parte superior da página (até 45% da altura).</li>
+  <li><b>Separação em campos</b>: o parser entende os três formatos (Enel em maiúsculas com o bairro em linha própria, Sabesp abreviada em duas linhas e Claro com bairro e cidade na mesma linha), expande abreviações (<code>AV</code> vira <i>Avenida</i>, <code>CS 143</code> vira <i>Casa 143</i>), tolera separadores trocados pelo OCR e corrige a cidade com uma lista de cidades conhecidas.</li>
+  <li><b>Validação</b>: campos obrigatórios, formato do CEP, UF existente, CEP dentro da faixa da UF, número plausível e termos suspeitos (palavra de uma ou duas letras ou começando em minúscula). Se a UF não for lida, ela é inferida do CEP e marcada para revisão.</li>
+  <li><b>Reforço quando há dúvida</b>: se a primeira leitura tem problema ou baixa confiança, o recorte é lido de novo com mais duas variantes de pré-processamento e cada campo é decidido por maioria. Se as variantes divergem, o campo vai para revisão.</li>
+  <li><b>Confiança</b>: média da confiança do Tesseract nas linhas usadas, menos 0,15 por problema encontrado. Os campos com palavra de baixa confiança, divergência ou falha de validação ficam em <code>campos_revisar</code>.</li>
+</ol>
+
+<figure>
+  <img src="figures/03_extracao_do_endereco_do_cliente.png" style="max-height: 222mm;" alt="Extração do endereço do cliente">
+  <figcaption><b>Figura 3.</b> Extração em uma foto inclinada de cada empresa. À esquerda, a zona lida (retângulo verde) na página corrigida. À direita, os campos extraídos conferidos com o gabarito e os outros endereços da fatura, que foram ignorados. Na Claro, todos os campos estão corretos, mas a confiança de 0,44 faz o sistema pedir revisão de bairro, cidade e UF.</figcaption>
+</figure>
+
+<h2>6. Validação, confirmação e correção pelo cidadão</h2>
+<p>O endereço lido é sempre uma <b>sugestão</b>. O enunciado pede que os dados sejam apresentados para confirmação ou correção, e o fluxo foi desenhado assim:</p>
+<ol>
+  <li>O cidadão envia a foto, ou escolhe digitar o endereço.</li>
+  <li>O formulário aparece preenchido. Os campos incertos ficam destacados com o aviso "Confira este campo" (cor, ícone e texto, para não depender só de cor), e a confiança da leitura é mostrada em porcentagem.</li>
+  <li>O cidadão corrige o que for preciso. Ao editar um campo destacado, o destaque some. Se a leitura falhar, o formulário abre vazio para digitação manual.</li>
+  <li>Ao confirmar, a tela mostra exatamente o que será salvo (<b>bairro, CEP e cidade</b>) e informa que a foto e os demais campos não são guardados.</li>
+</ol>
+<figure>
+  <img src="figures/05_tela_de_confirmacao.png" alt="Telas de envio, conferência e confirmação">
+  <figcaption><b>Figura 4.</b> Página de confirmação e correção (modo demonstração do serviço). A foto usada é uma foto difícil da Claro, em que a leitura erra "Itapetininga" e a tela destaca os campos de dúvida para o cidadão conferir.</figcaption>
+</figure>
+<p>A página usa rótulos associados a cada campo, alvos de toque grandes, foco visível, mensagens de erro anunciadas por leitores de tela e respeita o tema claro ou escuro do aparelho. São cuidados coerentes com o público do ZelaAí.</p>
+<div class="destaque-azul"><b>Privacidade (LGPD).</b> A foto é lida na memória e nunca é gravada em disco. A API do ZelaAí também não a armazena, e o endereço salvo se limita a bairro, CEP e cidade (minimização de dados). O cidadão vê e confirma cada dado antes de ele ser salvo.</div>
+
+<h2 class="quebra">7. Integração com o ZelaAí</h2>
+<p>A API do ZelaAí (Node.js) chama o componente de Visão por HTTP quando o cidadão envia uma foto em <code>POST /enderecos/extracao</code>. O serviço de Visão é um serviço Python (FastAPI) que expõe exatamente o contrato definido pela API:</p>
+<table>
+  <tr><th>Item</th><th>Contrato</th></tr>
+  <tr><td>Requisição</td><td><code>POST {VISAO_URL}/extrair-endereco</code>, <code>multipart/form-data</code>, campo <code>imagem</code> (JPG, PNG ou WEBP, até 5 MB). Header <code>x-api-key</code> quando <code>VISAO_API_KEY</code> está configurada.</td></tr>
+  <tr><td>Resposta (200)</td><td><code>{ "empresa": "Sabesp", "confianca": 0.93, "endereco": { "logradouro", "numero", "bairro", "cep", "cidade" } }</code>, mais os extras <code>complemento</code>, <code>uf</code>, <code>revisar</code>, <code>campos_revisar</code>, <code>problemas</code> e <code>metodo</code>. Campos não lidos vêm como <code>null</code>.</td></tr>
+  <tr><td>Erros</td><td>401 (chave), 413 (mais de 5 MB), 415 (tipo de arquivo), 422 (imagem ilegível ou nenhum endereço de cliente encontrado).</td></tr>
+  <tr><td>Saúde</td><td><code>GET /health</code>, usado como health check do contêiner.</td></tr>
+</table>
+<p>A API do ZelaAí valida a resposta com um esquema (<code>zod</code>), marca <code>revisar: true</code> quando <code>confianca &lt; 0,8</code> (o mesmo limiar usado internamente na Visão) e formata o CEP. <b>Qualquer falha da Visão</b> (serviço fora do ar, tempo esgotado, chave errada ou resposta inválida) ativa o <b>plano B</b>: a API responde <code>fonte: "manual"</code>, registra o evento <code>PlanoBAtivado</code> e orienta o cidadão a digitar o endereço. O cadastro nunca trava.</p>
+
+<table>
+  <tr><th>Variável</th><th>Onde</th><th>Uso</th></tr>
+  <tr><td><code>VISAO_URL</code></td><td>API do ZelaAí</td><td>endereço base do serviço de Visão; sem ele, a API usa o plano B</td></tr>
+  <tr><td><code>VISAO_API_KEY</code></td><td>API e serviço de Visão</td><td>chave compartilhada, guardada no Key Vault</td></tr>
+  <tr><td><code>VISAO_TIMEOUT_MS</code></td><td>API do ZelaAí</td><td>tempo limite (padrão 15000 ms). A leitura leva em média 1,2 s e, nas fotos difíceis, cerca de 2 s</td></tr>
+</table>
+
+<p><b>Verificação da integração.</b> O serviço foi executado localmente e chamado com o próprio cliente da API do ZelaAí (<code>visaoClient.js</code> e <code>enderecoService.js</code>, do repositório da API). Fotos legíveis voltaram com <code>fonte: "visao"</code>, empresa e endereço corretos e <code>revisar: false</code>; uma foto difícil voltou com <code>revisar: true</code>; e, com a chave errada, a API caiu no plano B manual, como previsto. Além disso, testes automatizados do serviço validam a resposta contra o mesmo formato que o esquema da API exige.</p>
+<p>O serviço é empacotado em um <code>Dockerfile</code> (Python 3.12, Tesseract e idioma português), para ser publicado como um segundo serviço em contêiner ao lado da API, porque o App Service Node da API não inclui o Tesseract.</p>
+
+<h2>8. Testes e métricas</h2>
+<p>O repositório tem <b>235 testes automatizados</b> (pytest), entre eles testes de unidade do parser, da validação e da votação; testes de integração do pipeline sobre as fotos sintéticas, com o gabarito; e testes do serviço HTTP (contrato, chave, tipo e tamanho do arquivo e ausência de gravação em disco). Os scripts <code>evaluate_document_detection.py</code>, <code>experiment_preprocessing.py</code> e <code>evaluate_extraction.py</code> calculam as métricas contra o gabarito.</p>
+<p>Cada campo é comparado com o gabarito ignorando maiúsculas e espaços, mas <b>não os acentos</b>. "Endereço completo" é a porcentagem de fotos com os sete campos corretos; "distrator" é a porcentagem de fotos em que o CEP extraído é o de uma agência, loja ou sede.</p>
+
+<h3>8.1 Comparação dos métodos de extração (36 fotos)</h3>
+<table>
+  <tr><th>Método</th><th class="n">Frontal</th><th class="n">Inclinada</th><th class="n">Difícil</th><th class="n">Geral</th><th class="n">Empresa</th><th class="n">Distrator</th><th class="n">Tempo por foto</th></tr>
+  <tr><td>Zona por empresa</td><td class="n">100%</td><td class="n">100%</td><td class="n">67%</td><td class="n">89%</td><td class="n">100%</td><td class="n">0%</td><td class="n">0,6 s</td></tr>
+  <tr><td>Âncora (página inteira)</td><td class="n">100%</td><td class="n">92%</td><td class="n">50%</td><td class="n">81%</td><td class="n">100%</td><td class="n">0%</td><td class="n">1,5 s</td></tr>
+  <tr class="destaque"><td>Automático (zona, depois âncora)</td><td class="n">100%</td><td class="n">100%</td><td class="n">67%</td><td class="n">89%</td><td class="n">100%</td><td class="n">0%</td><td class="n">1,2 s</td></tr>
+</table>
+
+<h3>8.2 Resultado do modo automático</h3>
+<table>
+  <tr><th>Grupo</th><th class="n">Fotos</th><th class="n">Empresa identificada</th><th class="n">Endereço completo</th><th class="n">Marcadas para revisão</th><th class="n">Tempo médio</th></tr>
+  <tr><td>Enel</td><td class="n">12</td><td class="n">100%</td><td class="n">92%</td><td class="n">25%</td><td class="n">0,9 s</td></tr>
+  <tr><td>Sabesp</td><td class="n">12</td><td class="n">100%</td><td class="n">83%</td><td class="n">33%</td><td class="n">1,1 s</td></tr>
+  <tr><td>Claro</td><td class="n">12</td><td class="n">100%</td><td class="n">92%</td><td class="n">58%</td><td class="n">1,6 s</td></tr>
+  <tr><td>frontal</td><td class="n">12</td><td class="n">100%</td><td class="n">100%</td><td class="n">17%</td><td class="n">0,8 s</td></tr>
+  <tr><td>inclinada</td><td class="n">12</td><td class="n">100%</td><td class="n">100%</td><td class="n">17%</td><td class="n">0,9 s</td></tr>
+  <tr><td>difícil</td><td class="n">12</td><td class="n">100%</td><td class="n">67%</td><td class="n">83%</td><td class="n">1,9 s</td></tr>
+  <tr class="destaque"><td>Todas</td><td class="n">36</td><td class="n">100%</td><td class="n">89%</td><td class="n">39%</td><td class="n">1,2 s</td></tr>
+</table>
+<p class="pequeno">Os tempos foram medidos em um ambiente de nuvem sem GPU, em um só processo, e variam com o hardware.</p>
+<p>Acerto por campo: logradouro 89%, número 97%, complemento 94%, bairro 97%, cidade 97%, UF 97% e CEP 97%.</p>
+
+
+<h3>8.3 Confiança e revisão</h3>
+<ul>
+  <li>14 das 36 fotos (39%) foram marcadas para revisão.</li>
+  <li><b>As 4 fotos com algum campo errado foram todas marcadas para revisão</b>: nenhum erro passou sem aviso ao cidadão.</li>
+  <li>Das 32 fotos corretas, 10 também foram marcadas, ou seja, o sistema é conservador. A confiança média é 0,72 nas fotos corretas e 0,23 nas erradas.</li>
+  <li>O endereço de agência, loja ou sede <b>nunca</b> foi escolhido no lugar do endereço do cliente (0% de confusão em 36 fotos).</li>
+</ul>
+
+<h3>8.4 Análise dos erros</h3>
+<p>Os quatro erros do modo automático são todos de fotos difíceis (escuras, com sombra, desfoque e ruído):</p>
+<table>
+  <tr><th style="width:24%">Foto</th><th>O que aconteceu</th></tr>
+  <tr><td><code>enel_02_dificil</code></td><td><i>Dom Pedro II</i> lido como <i>Dom Pedro Tt</i>. O termo de duas letras é apontado como suspeito e o campo vai para revisão.</td></tr>
+  <tr><td><code>sabesp_02_dificil</code></td><td>Foto ilegível (escura, borrada e com a página 17 px deslocada na retificação). O sistema não inventa um endereço: devolve confiança 0 e pede o preenchimento manual. Mostra que o recorte por coordenadas fixas é frágil.</td></tr>
+  <tr><td><code>sabesp_03_dificil</code></td><td><i>José</i> lido sem acento e complemento <i>BL B AP 174</i> lido como <i>BL BAP 174</i>. O complemento é apontado como não reconhecido.</td></tr>
+  <tr><td><code>claro_03_dificil</code></td><td><i>Itapetininga</i> lido como <i>Rapetininga</i> e <i>Barão</i> como <i>Bardo</i>. As leituras das variantes divergem e o campo é marcado para revisão.</td></tr>
+</table>
+<p>Um erro corrigido durante o desenvolvimento: em <code>claro_04_dificil</code>, quando o rótulo do endereço do cliente não era lido, o plano B por âncora aceitava o primeiro CEP da página e o seguinte era o de uma loja (um endereço distrator). Hoje ele só aceita blocos na parte superior da página; sem rótulo e sem bloco, devolve "não encontrado" e pede preenchimento manual. Há um teste automatizado para esse caso.</p>
+
+<figure>
+  <img src="figures/04_metricas_de_extracao.png" style="max-height: 118mm;" alt="Métricas de extração">
+  <figcaption><b>Figura 5.</b> Acerto do endereço completo por condição e empresa (em %, n = 4 fotos por barra), acerto por campo e tempo médio por foto, no modo automático.</figcaption>
+</figure>
+
+<h2>9. Limitações</h2>
+<ul>
+  <li><b>Dados simulados.</b> As fotos são simuladas e os três layouts foram desenhados pela equipe com base em faturas reais, mas não são cópias. Em faturas reais, a zona do endereço, as palavras-chave e os rótulos de cada empresa precisam ser calibrados.</li>
+  <li><b>Números otimistas.</b> Os limiares (por exemplo, 0,7 de confiança por palavra e 45% da altura da página) e os parâmetros do pré-processamento foram escolhidos olhando para este mesmo dataset. Os resultados em fotos reais tendem a ser piores.</li>
+  <li><b>Recorte por coordenadas.</b> A zona do endereço é fixa por empresa. Um desvio de poucos pixels na retificação pode cortar uma linha (caso de <code>sabesp_02_dificil</code>). Margem adicional ou âncoras de texto reduziriam o problema.</li>
+  <li><b>Listas parciais.</b> A lista de cidades conhecidas cobre capitais e cidades grandes e deveria ser trocada pela base de municípios do IBGE. A checagem de CEP × UF usa as faixas gerais dos Correios e não confirma se a rua existe naquele CEP.</li>
+  <li><b>OCR confiante e errado.</b> Nomes de rua lidos errado com palavras que parecem plausíveis só são pegos quando as variantes divergem. Por isso a confirmação pelo cidadão é parte essencial do fluxo.</li>
+  <li><b>Acentos.</b> A perda de acentos (<i>José</i> lido como <i>Jose</i>) conta como erro na avaliação, mas tem baixo impacto para quem confirma o endereço.</li>
+  <li><b>Escopo da foto.</b> O documento precisa estar em pé (orientação retrato) e inteiro na imagem. Fundos com muitas texturas podem confundir a detecção.</li>
+  <li><b>Só três empresas</b> (Enel, Sabesp e Claro). Outras empresas exigem novo layout, zona e palavras-chave. O plano B por âncora ajuda, mas não substitui a calibração.</li>
+</ul>
+
+<h2>10. ODS conectados</h2>
+<p>O ZelaAí conecta-se aos ODS <b>9, 10 e 11</b>. A tabela abaixo explica como o produto e, em particular, o componente de Visão contribuem para metas específicas. As metas foram conferidas no texto oficial da ONU (<a href="https://sdgs.un.org/goals">sdgs.un.org/goals</a>); as citações estão no original em inglês, seguidas de uma explicação em português.</p>
+
+<div class="ods">
+  <h3>ODS 11 · Cidades e comunidades sustentáveis</h3>
+  <blockquote><b>Meta 11.7.</b> "By 2030, provide universal access to safe, inclusive and accessible, green and public spaces, in particular for women and children, older persons and persons with disabilities."</blockquote>
+  <blockquote><b>Meta 11.2.</b> "By 2030, provide access to safe, affordable, accessible and sustainable transport systems for all, improving road safety, notably by expanding public transport, with special attention to the needs of those in vulnerable situations, women, children, persons with disabilities and older persons."</blockquote>
+  <blockquote><b>Meta 11.3.</b> "By 2030, enhance inclusive and sustainable urbanization and capacity for participatory, integrated and sustainable human settlement planning and management in all countries."</blockquote>
+  <p><b>Como contribuímos.</b> O ZelaAí leva ao poder público as falhas em calçadas, semáforos e pontos de ônibus que afetam idosos e pessoas com deficiência (metas 11.7 e 11.2), e as acompanha até a solução. Ao associar cada ocorrência ao bairro e priorizar por território, abre um canal de participação do cidadão no planejamento e na gestão da cidade (meta 11.3). A Visão Computacional entra na porta de entrada: ler o endereço da conta em vez de exigir digitação reduz a barreira para que quem mais precisa consiga se cadastrar e reportar.</p>
+</div>
+
+<div class="ods">
+  <h3>ODS 10 · Redução das desigualdades</h3>
+  <blockquote><b>Meta 10.2.</b> "By 2030, empower and promote the social, economic and political inclusion of all, irrespective of age, sex, disability, race, ethnicity, origin, religion or economic or other status."</blockquote>
+  <p><b>Como contribuímos.</b> O público do ZelaAí é composto por idosos e pessoas com deficiência, grupos citados na meta. O componente de Visão evita que digitar um endereço seja um obstáculo para o uso do serviço, e o plano B manual garante que quem não consegue fotografar a conta ou teve uma leitura ruim também seja atendido. A página de confirmação foi desenhada com acessibilidade (rótulos, foco visível, leitores de tela, alvos de toque grandes).</p>
+</div>
+
+<div class="ods">
+  <h3>ODS 9 · Indústria, inovação e infraestrutura</h3>
+  <blockquote><b>Meta 9.1.</b> "Develop quality, reliable, sustainable and resilient infrastructure, including regional and transborder infrastructure, [...]" (a meta segue com o apoio ao desenvolvimento econômico e ao bem-estar humano, com foco no acesso acessível e equitativo para todos).</blockquote>
+  <blockquote><b>Meta 9.c.</b> "Significantly increase access to information and communications technology [...]" (a meta segue com o acesso universal e a preço acessível à internet nos países menos desenvolvidos).</blockquote>
+  <p><b>Como contribuímos.</b> O ZelaAí usa tecnologia da informação para tornar a manutenção da infraestrutura urbana mais visível e acompanhável (meta 9.1). O componente de Visão foi construído com ferramentas abertas e interoperáveis (OpenCV, Tesseract e uma API HTTP com contrato claro), o que facilita que outra prefeitura ou equipe o reutilize. Reconhecemos que a meta 9.c trata de acesso à tecnologia em sentido amplo, e nossa contribuição a ela é indireta: um serviço digital que funciona também para quem tem pouca familiaridade com formulários.</p>
+</div>
+
+<h3>Indicadores para acompanhar a contribuição</h3>
+<table>
+  <tr><th>Indicador</th><th>Situação</th></tr>
+  <tr><td>Acerto do endereço completo e taxa de revisão (seção 8)</td><td>Medidos nas 36 fotos sintéticas: 89% de acerto e 39% de revisão.</td></tr>
+  <tr><td>Nenhum erro sem aviso ao cidadão</td><td>Medido: os 4 erros foram todos marcados para revisão.</td></tr>
+  <tr><td>Tempo de cadastro antes e depois da leitura automática</td><td>A medir no MVP com usuários reais.</td></tr>
+  <tr><td>% de campos aceitos sem edição e taxa de correção manual</td><td>A medir no MVP com usuários reais (a tela de confirmação permite registrar).</td></tr>
+  <tr><td>% de cadastros concluídos</td><td>A medir no MVP com usuários reais.</td></tr>
+</table>
+
+<h3>Boas práticas de cidades inteligentes centradas nas pessoas</h3>
+<p>O componente segue princípios das fontes do briefing sobre cidades inteligentes e transformação digital inclusiva (UN-Habitat e PNUD): <b>transparência e supervisão humana</b> (mostra a confiança e deixa a decisão final com o cidadão), <b>privacidade desde a concepção</b> (processamento em memória, dados mínimos, nada de foto guardada), <b>alternativas quando o digital falha</b> (digitação manual) e <b>software aberto e interoperável</b> (OpenCV, Tesseract e API com contrato claro).</p>
+
+<h2>11. Links e referências</h2>
+<ul>
+  <li>API do ZelaAí: <a href="https://zelai-api.azurewebsites.net">zelai-api.azurewebsites.net</a> · Documentação: <a href="https://zelai-api.azurewebsites.net/docs">zelai-api.azurewebsites.net/docs</a> · Código: <a href="https://github.com/Rodriguessz/zelai-api">github.com/Rodriguessz/zelai-api</a></li>
+  <li>Objetivos de Desenvolvimento Sustentável (ONU): <a href="https://sdgs.un.org/goals/goal9">ODS 9</a> · <a href="https://sdgs.un.org/goals/goal10">ODS 10</a> · <a href="https://sdgs.un.org/goals/goal11">ODS 11</a></li>
+  <li>OpenCV: <a href="https://opencv.org">opencv.org</a> · Tesseract OCR: <a href="https://github.com/tesseract-ocr/tesseract">github.com/tesseract-ocr/tesseract</a></li>
+  <li>Material das aulas de Visão Computacional do professor Wilians Conde (ROI, tons de cinza, Otsu, morfologia, filtragem, contornos, histogramas, perspectiva e OCR).</li>
+</ul>
+
+</body>
+</html>

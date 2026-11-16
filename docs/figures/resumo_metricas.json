@@ -6,7 +6,7 @@
     "endereco_completo_sem_acentos": 88.88888888888889,
     "confundiu_com_distrator": 0.0,
     "marcadas_para_revisao": 38.88888888888889,
-    "tempo_medio_s": 1.3102318503889085
+    "tempo_medio_s": 1.2089939911111287
   },
   "por_condicao": {
     "frontal": {
@@ -16,7 +16,7 @@
       "endereco_completo_sem_acentos": 100.0,
       "confundiu_com_distrator": 0.0,
       "marcadas_para_revisao": 16.666666666666664,
-      "tempo_medio_s": 0.8612769020000238
+      "tempo_medio_s": 0.7781608422500028
     },
     "inclinada": {
       "fotos": 12,
@@ -25,7 +25,7 @@
       "endereco_completo_sem_acentos": 100.0,
       "confundiu_com_distrator": 0.0,
       "marcadas_para_revisao": 16.666666666666664,
-      "tempo_medio_s": 1.0034773974999969
+      "tempo_medio_s": 0.9068548948333538
     },
     "dificil": {
       "fotos": 12,
@@ -34,7 +34,7 @@
       "endereco_completo_sem_acentos": 66.66666666666666,
       "confundiu_com_distrator": 0.0,
       "marcadas_para_revisao": 83.33333333333334,
-      "tempo_medio_s": 2.0659412516667053
+      "tempo_medio_s": 1.9419662362500294
     }
   },
   "por_empresa": {
@@ -45,7 +45,7 @@
       "endereco_completo_sem_acentos": 91.66666666666666,
       "confundiu_com_distrator": 0.0,
       "marcadas_para_revisao": 25.0,
-      "tempo_medio_s": 0.9818319715833278
+      "tempo_medio_s": 0.9152034423333552
     },
     "sabesp": {
       "fotos": 12,
@@ -54,7 +54,7 @@
       "endereco_completo_sem_acentos": 83.33333333333334,
       "confundiu_com_distrator": 0.0,
       "marcadas_para_revisao": 33.33333333333333,
-      "tempo_medio_s": 1.206165290750069
+      "tempo_medio_s": 1.1125697555833274
     },
     "claro": {
       "fotos": 12,
@@ -63,7 +63,7 @@
       "endereco_completo_sem_acentos": 91.66666666666666,
       "confundiu_com_distrator": 0.0,
       "marcadas_para_revisao": 58.333333333333336,
-      "tempo_medio_s": 1.742698288833329
+      "tempo_medio_s": 1.5992087754167035
     }
   },
   "por_campo": {

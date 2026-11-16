@@ -343,9 +343,11 @@ Um erro que o plano B por âncora cometia antes de uma correção: em `claro_04_
 - O OCR confiante e errado é possível: nomes de rua lidos errado com palavras que parecem plausíveis (`Rapetininga`) só são pegos quando as variantes divergem.
 - Perda de acentos (`José` lido como `Jose`) conta como erro na avaliação, mas é de baixo impacto para o usuário que confirma o endereço.
 
-## Figuras do relatório
+## Relatório técnico e figuras
 
-As imagens do relatório técnico ficam em `docs/figures/` e são geradas a partir do dataset sintético:
+O relatório técnico em PDF está em `docs/relatorio_tecnico.pdf` (fonte em `docs/relatorio_tecnico.html`). Ele reúne a Ficha Técnica, as técnicas usadas, as métricas, as limitações, o uso do endereço no ZelaAí e a seção de ODS.
+
+As imagens do relatório ficam em `docs/figures/` e são geradas a partir do dataset sintético:
 
 | Arquivo | Conteúdo |
 |---|---|
