@@ -164,6 +164,8 @@ O App Service Node da API não tem Tesseract, então a Visão roda como um **seg
 
 Os comandos completos estão em [docs/deploy_azure.md](docs/deploy_azure.md).
 
+O serviço está publicado em `https://zelai-visao.azurewebsites.net` (rota de saúde: `/health`). A rota `POST /extrair-endereco` exige o header `x-api-key`; sem ele, a resposta é `401`.
+
 ## Dataset sintético
 
 Para testar o pipeline sem usar dados pessoais reais, o repositório traz um dataset sintético com gabarito, gerado por código:

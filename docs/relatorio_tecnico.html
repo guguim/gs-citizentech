@@ -64,6 +64,7 @@
     <b>FIAP · Global Solution 2026.2 · CitizenTech</b> · Applied Computer Vision (prof. Wilians Conde)<br>
     <b>API do ZelaAí:</b> <a href="https://zelai-api.azurewebsites.net">zelai-api.azurewebsites.net</a> ·
     <b>Documentação da API:</b> <a href="https://zelai-api.azurewebsites.net/docs">zelai-api.azurewebsites.net/docs</a><br>
+    <b>Serviço de Visão (no ar):</b> <a href="https://zelai-visao.azurewebsites.net/health">zelai-visao.azurewebsites.net</a><br>
     <b>Repositório da Visão Computacional:</b> <a href="https://github.com/guguim/gs-citizentech">github.com/guguim/gs-citizentech</a> ·
     <b>Repositório da API:</b> <a href="https://github.com/Rodriguessz/zelai-api">github.com/Rodriguessz/zelai-api</a><br>
     <b>Integrantes:</b> RM553377 Enzo Rodrigues · RM552632 Gabriel Mediotti · RM553266 Hugo Santos · RM553384 Maria Júlia · RM553521 Rafael Cristofali
@@ -81,7 +82,7 @@
   <tr><th>Arquitetura: componentes</th><td>API Node.js 22 (Azure App Service) · PostgreSQL 16 · Key Vault · Application Insights · <b>Visão Computacional (serviço Python com OpenCV e Tesseract, objeto deste relatório)</b> · GenAI (triagem) · Apache Airflow (dados) · robô UiPath (RPA) · Power BI · front-end web acessível.</td></tr>
   <tr><th>Fontes de dados</th><td>Documentos sintéticos gerados pela equipe, com gabarito e sem dados pessoais reais · ocorrências registradas na plataforma · dados abertos SP156 e GeoSampa · IBGE.</td></tr>
   <tr><th>Modelos de IA utilizados</th><td>OCR com Tesseract (idioma português) sobre imagens tratadas com OpenCV · LLM para triagem de ocorrências (GenAI), com plano B por regras e decisão final humana.</td></tr>
-  <tr><th>URL do MVP e repositório</th><td>API: <a href="https://zelai-api.azurewebsites.net">zelai-api.azurewebsites.net</a> · Swagger: <a href="https://zelai-api.azurewebsites.net/docs">/docs</a> · Repositório da Visão Computacional: <a href="https://github.com/guguim/gs-citizentech">guguim/gs-citizentech</a> · Repositório da API: <a href="https://github.com/Rodriguessz/zelai-api">Rodriguessz/zelai-api</a></td></tr>
+  <tr><th>URL do MVP e repositório</th><td>API: <a href="https://zelai-api.azurewebsites.net">zelai-api.azurewebsites.net</a> · Swagger: <a href="https://zelai-api.azurewebsites.net/docs">/docs</a> · Serviço de Visão: <a href="https://zelai-visao.azurewebsites.net/health">zelai-visao.azurewebsites.net</a> · Repositório da Visão Computacional: <a href="https://github.com/guguim/gs-citizentech">guguim/gs-citizentech</a> · Repositório da API: <a href="https://github.com/Rodriguessz/zelai-api">Rodriguessz/zelai-api</a></td></tr>
   <tr><th>Indicadores de impacto</th><td>Da Visão: acerto do endereço completo, taxa de revisão e tempo de leitura (seção 8). Da plataforma: tempo médio entre o registro e o protocolo no 156, % de ocorrências resolvidas e prioridade por bairro.</td></tr>
   <tr><th>ODS conectados</th><td>ODS 9 (infraestrutura resiliente) · ODS 10 (redução das desigualdades) · ODS 11 (cidades e comunidades sustentáveis). Detalhes na seção 10.</td></tr>
 </table>
@@ -232,7 +233,8 @@
 </table>
 
 <p><b>Verificação da integração.</b> O serviço foi executado localmente e chamado com o próprio cliente da API do ZelaAí (<code>visaoClient.js</code> e <code>enderecoService.js</code>, do repositório da API). Fotos legíveis voltaram com <code>fonte: "visao"</code>, empresa e endereço corretos e <code>revisar: false</code>; uma foto difícil voltou com <code>revisar: true</code>; e, com a chave errada, a API caiu no plano B manual, como previsto. Além disso, testes automatizados do serviço validam a resposta contra o mesmo formato que o esquema da API exige.</p>
-<p>O serviço é empacotado em um <code>Dockerfile</code> (Python 3.12, Tesseract e idioma português), para ser publicado como um segundo serviço em contêiner ao lado da API, porque o App Service Node da API não inclui o Tesseract.</p>
+<p><b>Publicação.</b> O serviço é empacotado em um <code>Dockerfile</code> (Python 3.12, Tesseract e idioma português) e roda como um segundo Web App em contêiner, no mesmo grupo de recursos e no mesmo plano Linux da API, porque o App Service Node da API não inclui o Tesseract. A imagem é construída e publicada no GitHub Container Registry por um workflow do GitHub Actions a cada merge na <code>main</code>, depois de um teste de fumaça (o contêiner sobe, <code>/health</code> responde e a rota protegida recusa chamadas sem chave). Na API do ZelaAí, as configurações <code>VISAO_URL</code> e <code>VISAO_API_KEY</code> apontam para o serviço.</p>
+<p><b>Verificação em produção.</b> Em 18/11/2026, uma chamada ao serviço publicado em <code>https://zelai-visao.azurewebsites.net</code> sem a chave voltou <code>401</code>; com a chave, a foto sintética <code>sabesp_01_frontal</code> voltou com empresa Sabesp, confiança 0,93, endereço completo (logradouro, número, bairro, CEP, cidade, complemento e UF) e <code>revisar: false</code>.</p>
 
 <h2>8. Testes e métricas</h2>
 <p>O repositório tem <b>235 testes automatizados</b> (pytest), entre eles testes de unidade do parser, da validação e da votação; testes de integração do pipeline sobre as fotos sintéticas, com o gabarito; e testes do serviço HTTP (contrato, chave, tipo e tamanho do arquivo e ausência de gravação em disco). Os scripts <code>evaluate_document_detection.py</code>, <code>experiment_preprocessing.py</code> e <code>evaluate_extraction.py</code> calculam as métricas contra o gabarito.</p>
@@ -336,6 +338,7 @@
 
 <h2>11. Links e referências</h2>
 <ul>
+  <li>Serviço de Visão Computacional em produção: <a href="https://zelai-visao.azurewebsites.net/health">zelai-visao.azurewebsites.net</a> (rota de saúde em <code>/health</code>; a rota de extração exige chave de API)</li>
   <li>Repositório da Visão Computacional (código, dataset sintético, testes e README): <a href="https://github.com/guguim/gs-citizentech">github.com/guguim/gs-citizentech</a></li>
   <li>API do ZelaAí: <a href="https://zelai-api.azurewebsites.net">zelai-api.azurewebsites.net</a> · Documentação: <a href="https://zelai-api.azurewebsites.net/docs">zelai-api.azurewebsites.net/docs</a> · Código: <a href="https://github.com/Rodriguessz/zelai-api">github.com/Rodriguessz/zelai-api</a></li>
   <li>Objetivos de Desenvolvimento Sustentável (ONU): <a href="https://sdgs.un.org/goals/goal9">ODS 9</a> · <a href="https://sdgs.un.org/goals/goal10">ODS 10</a> · <a href="https://sdgs.un.org/goals/goal11">ODS 11</a></li>
